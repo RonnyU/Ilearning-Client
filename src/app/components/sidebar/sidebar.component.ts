@@ -8,7 +8,9 @@ import { UserService } from '../../services/user.service';
 })
 export class SidebarComponent implements OnInit {
   public identity;
-  constructor(private _userService: UserService) {}
+  constructor(private _userService: UserService) {
+    this.identity = this._userService.getIdentity();
+  }
 
   ngOnInit(): void {
     this.identity = this._userService.getIdentity();

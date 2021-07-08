@@ -125,7 +125,9 @@
             <!-- Profile Box -->
             <div class="profile-box dropdown" id="someElementID5">
               <div class="btn btn-default dropdown-toggle">
-                <span *ngIf="identity" class="profile-image"
+                <span
+                  *ngIf="identity && identity.imagePath"
+                  class="profile-image"
                   ><img
                     src="{{ url + 'user/avatar/' + identity.imagePath }}"
                     alt=""

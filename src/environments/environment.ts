@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  //url: 'https://api-ccc-tib6i.ondigitalocean.app/api/',
-  url: 'http://localhost:3999/api/',
+  url: 'https://ilearning-api-badz6.ondigitalocean.app/api/',
+  //url: 'http://localhost:3999/api/',
 };
 
 /*

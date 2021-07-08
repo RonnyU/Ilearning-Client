@@ -43,6 +43,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.identity = this._userService.getIdentity();
     this._route.params.subscribe((params) => {
       let page = +params.page;
 

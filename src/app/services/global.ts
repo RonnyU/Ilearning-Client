@@ -1,5 +1,5 @@
 export const global = {
-  url: 'https://ilearning-api-ygx9e.ondigitalocean.app/api/',
+  url: 'https://ilearning-api-badz6.ondigitalocean.app/api/',
   htmlEntities: function (str) {
     return String(str)
       .replace('&ntilde;', 'ñ')

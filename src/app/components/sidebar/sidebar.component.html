@@ -19,7 +19,7 @@
         <span><i class="flaticon-home"></i>Cursos Comprados</span></a
       >
     </li>
-    <li>
+    <li *ngIf="identity">
       <a [routerLink]="['/instructor/perfil', identity._id]"
         ><i class="icon flaticon-home"></i>
         <span><i class="flaticon-home"></i>Cursos Propios</span></a

@@ -84,17 +84,17 @@
                   alt=""
                 />
               </div>
-              Kerry Oaky
+              {{ data.user.name }} {{ data.user.surname }}
             </div>
-            <!-- Follow -->
-            <div class="follow"><a href="#">+ Suscríbete</a></div>
+            <!-- Follow 
+            <div class="follow"><span>+ Suscríbete</span></div> -->
           </div>
           <div class="pull-right">
             <ul class="social-box">
               <li class="share">Compartir</li>
-              <li class="facebook"><a href="#" class="fab fa-facebook"></a></li>
-              <li class="google"><a href="#" class="fab fa-google"></a></li>
-              <li class="twitter"><a href="#" class="fab fa-twitter"></a></li>
+              <li class="facebook"><a class="fab fa-facebook"></a></li>
+              <li class="google"><a class="fab fa-google"></a></li>
+              <li class="twitter"><a class="fab fa-twitter"></a></li>
             </ul>
           </div>
         </div>
@@ -148,7 +148,13 @@
                       [ngClass]="i == 0 ? ' current' : ''"
                     >
                       <div
-                        class="sec-title text-left px-5 lightbox-image play-icon"
+                        class="
+                          sec-title
+                          text-left
+                          px-5
+                          lightbox-image
+                          play-icon
+                        "
                         style="font-size: 15px; line-height: normal"
                       >
                         <span></span>
@@ -164,7 +170,12 @@
                         <div class="clearfix">
                           <div class="pull-left">
                             <span
-                              class="lightbox-image play-icon pointer lesson-item"
+                              class="
+                                lightbox-image
+                                play-icon
+                                pointer
+                                lesson-item
+                              "
                               ><span class="fa"
                                 ><i
                                   class="fas fa-arrow-right"
