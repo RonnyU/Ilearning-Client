@@ -1,0 +1,125 @@
+<footer
+  class="main-footer"
+  style="max-height: 300px; background-color: #3d6ade !important"
+>
+  <!-- Pattern Layer -->
+  <div
+    class="pattern-layer"
+    style="background-image: url(assets/images/background/pattern-2.png)"
+  ></div>
+  <div
+    class="pattern-layer-two"
+    style="background-image: url(assets/images/background/pattern-3.png)"
+  ></div>
+  <!-- Upper Box -->
+  <div class="upper-box">
+    <div class="auto-container">
+      <h4>
+        Subscribirse a nuestras <br />
+        Actualizaciones diarias
+      </h4>
+
+      <!-- Subscribe Form -->
+      <div class="subscribe-form">
+        <form #gOrder="ngForm" (ngSubmit)="createOrder(gOrder)">
+          <div class="form-group clearfix">
+            <span class="icon flaticon-mail"></span>
+            <input
+              style="border: 1px solid white !important"
+              type="email"
+              name="email"
+              [(ngModel)]="email"
+              value=""
+              placeholder="Please Enter Your Email"
+              required
+            />
+            <button
+              type="submit"
+              style="
+                background-color: #3d6ade !important;
+                border: 1px solid white !important;
+              "
+              class="theme-btn btn-style-two"
+            >
+              <span class="txt text-white">Subscribirse Ahora</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="auto-container">
+    <!-- Widgets Section -->
+    <div class="widgets-section">
+      <div class="row clearfix">
+        <!-- Big Column -->
+        <div class="big-column col-lg-6 col-md-12 col-sm-12">
+          <div class="row clearfix">
+            <!--Footer Column-->
+            <div class="footer-column col-lg-7 col-md-6 col-sm-12">
+              <div class="footer-widget logo-widget">
+                <div class="logo"></div>
+                <div class="text">
+                  There are many variations of passages of Lorem Ipsum
+                  available,
+                </div>
+                <div class="social-box">
+                  <a href="#" class="fa fa-facebook-square"></a>
+                  <a href="#" class="fa fa-twitter-square"></a>
+                  <a href="#" class="fa fa-linkedin-square"></a>
+                </div>
+              </div>
+            </div>
+
+            <!--Footer Column-->
+            <div class="footer-column col-lg-5 col-md-6 col-sm-12">
+              <div class="footer-widget links-widget">
+                <ul class="links-widget">
+                  <li><a href="#">Afiliados</a></li>
+                  <li><a href="#">Equipo</a></li>
+                  <li><a href="#">Reviews</a></li>
+                  <li><a href="#">Blogs</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Big Column -->
+        <div class="big-column col-lg-6 col-md-12 col-sm-12">
+          <div class="row clearfix">
+            <!--Footer Column-->
+            <div class="footer-column col-lg-6 col-md-6 col-sm-12">
+              <div class="footer-widget links-widget">
+                <ul class="links-widget">
+                  <li><a href="#">Politica de privacidad</a></li>
+                  <li><a href="#">Area de soporte</a></li>
+                  <li><a href="#">Documentacion</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <!--Footer Column-->
+            <div class="footer-column col-lg-6 col-md-6 col-sm-12">
+              <div class="footer-widget links-widget">
+                <ul class="links-widget">
+                  <li><a href="#">Inicio</a></li>
+                  <li><a href="#">Acerca de nosotros</a></li>
+                  <li><a href="#">Novedades</a></li>
+                  <li><a href="#">Precios</a></li>
+                  <li><a href="#">Contacto</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom text-center">
+      <div class="copyright">Copyright &copy; 2020 CCC</div>
+    </div>
+  </div>
+</footer>

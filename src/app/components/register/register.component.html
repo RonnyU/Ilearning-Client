@@ -1,0 +1,173 @@
+<!-- Sign Up Section -->
+<section
+  class="signup-section"
+  style="background-image: url(images/background/pattern-4.png)"
+>
+  <div class="auto-container">
+    <div class="logo">
+      <a href="index.html"><img src="images/logo-3.png" alt="" /></a>
+    </div>
+    <div class="inner-container">
+      <h2>
+        Calurosa bienvenida a
+        <br />
+        <span class="theme_color">Comuna Colectivo Creativo</span>
+      </h2>
+      <div class="text">Regístrate y comienza a aprender.</div>
+      <!-- Login Form -->
+      <div class="styled-form">
+        <form
+          method="post"
+          #registerForm="ngForm"
+          (ngSubmit)="onSubmit(registerForm)"
+        >
+          <div class="row clearfix">
+            <!-- Form Group -->
+            <div class="form-group col-lg-6 col-md-12 col-sm-12">
+              <label>Primer nombre</label>
+              <input
+                type="text"
+                name="name"
+                value=""
+                placeholder="nombre"
+                #name="ngModel"
+                [(ngModel)]="user.name"
+                required
+                pattern="[a-zA-ZÀ-ÿ ]+"
+              />
+              <small
+                *ngIf="!name.valid && name.touched"
+                class="invalid-feedback d-block"
+              >
+                El nombre no es válido
+              </small>
+            </div>
+
+            <!-- Form Group -->
+            <div class="form-group col-lg-6 col-md-12 col-sm-12">
+              <label>Apellidos</label>
+              <input
+                type="text"
+                name="surname"
+                value=""
+                placeholder="Apellido"
+                #surname="ngModel"
+                [(ngModel)]="user.surname"
+                required
+                pattern="[a-zA-ZÀ-ÿ ]+"
+              />
+              <small
+                *ngIf="!surname.valid && surname.touched"
+                class="invalid-feedback d-block"
+              >
+                Los apellidos no son válidos
+              </small>
+            </div>
+
+            <!-- Form Group -->
+            <div class="form-group col-lg-6 col-md-12 col-sm-12">
+              <label>Identificación</label>
+              <input
+                type="text"
+                name="identity"
+                value=""
+                placeholder="Cédula, Dimex, Pasaporte..."
+                #identity="ngModel"
+                [(ngModel)]="user.identity"
+                required
+              />
+            </div>
+
+            <!-- Form Group -->
+            <div class="form-group col-lg-6 col-md-12 col-sm-12">
+              <label>Correo electrónico</label>
+              <input
+                type="email"
+                name="email"
+                value=""
+                placeholder="pedro_pedron@gmail.com"
+                #email="ngModel"
+                [(ngModel)]="user.email"
+                required
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+              />
+              <small
+                *ngIf="!email.valid && email.touched"
+                class="invalid-feedback d-block"
+              >
+                El email no es válido
+              </small>
+            </div>
+
+            <!-- Form Group -->
+            <div class="form-group col-lg-6 col-md-12 col-sm-12">
+              <label>Contraseña</label>
+              <!-- <span class="eye-icon fa fa-eye"></span> -->
+              <input
+                type="password"
+                name="password"
+                value=""
+                placeholder="Una contraseña muy segura"
+                #password="ngModel"
+                [(ngModel)]="user.password"
+                required
+                pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#_?¿!@$%^&*-]).{8,}$"
+              />
+              <small
+                *ngIf="!password.valid && password.touched"
+                class="invalid-feedback d-block"
+              >
+                La cotraseña debe contener minimo 8 caracteres, al menos una
+                letra mayuscula, una letra minuscula, un numero y un caracter
+                especial
+                <br /><br />
+                NOTA: la letra 'ñ' no esta permitida.
+              </small>
+            </div>
+
+            <!-- Form Group -->
+            <div class="form-group col-lg-6 col-md-12 col-sm-12">
+              <label>Confirma la contraseña</label>
+              <!-- <span class="eye-icon fa fa-eye"></span> -->
+              <input
+                type="password"
+                name="confirmPassword"
+                value=""
+                placeholder="Haz que coincida con la anterior."
+                ngModel
+                required
+              />
+            </div>
+            <div class="form-group col-lg-12 col-md-12 col-sm-12 text-center">
+              <button
+                id="btn-login"
+                type="submit"
+                class="btn-style-one"
+                [disabled]="registerForm.invalid"
+              >
+                <div
+                  class="spinner-border spinner-border-sm hide loading"
+                  role="status"
+                >
+                  <span class="sr-only">Loading...</span>
+                </div>
+                <span class="txt">Regístrarse</span>
+              </button>
+            </div>
+
+            <div class="form-group col-lg-12 col-md-12 col-sm-12">
+              <div class="users">
+                ¿Ya tienes una cuenta?
+                <a [routerLink]="['/login']">¡Inicia sesión ahora!</a>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="copyright">Copyright © 2020 Comuna</div>
+  </div>
+</section>
+<!-- End Sign Up Section -->

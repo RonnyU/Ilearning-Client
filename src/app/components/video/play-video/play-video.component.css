@@ -1,0 +1,17 @@
+.fixed-height {
+  max-height: 100%;
+  min-height: 100%;
+  overflow-y: visible;
+  overflow-x: hidden;
+  border-left: 1px solid rgb(223, 223, 223);
+}
+.circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  background-color: rgb(238, 238, 238);
+}
+.card-body {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}

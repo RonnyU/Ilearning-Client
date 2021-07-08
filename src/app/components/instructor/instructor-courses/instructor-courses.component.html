@@ -1,0 +1,84 @@
+<!-- Featured Section -->
+<div class="featured-section">
+  <div class="row clearfix">
+    <!-- Feature Block Two -->
+    <div
+      *ngFor="
+        let course of courses | paginate: { itemsPerPage: 6, currentPage: p }
+      "
+      class="feature-block-two col-lg-6 col-md-12 col-sm-12"
+    >
+      <div class="inner-box">
+        <div class="content">
+          <div class="image">
+            <a (click)="validarComprado(course._id, course.user._id)"
+              ><img src="{{ url + 'course/image/' + course.imagePath }}" alt=""
+            /></a>
+          </div>
+          <h6>
+            <a (click)="validarComprado(course._id, course.user._id)">{{
+              course.title
+            }}</a>
+          </h6>
+          <div
+            class="text module text-v-truncated"
+            [innerHTML]="course.courseDesc"
+          ></div>
+          <div class="author">
+            Hecho por:
+            <span>{{ course.user.name + " " + course.user.surname }}</span>
+          </div>
+          <div class="clearfix">
+            <div class="pull-left">
+              <div class="rating">
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="dark fa fa-star-o"></span>
+              </div>
+            </div>
+            <div class="pull-right">
+              <div class="price">{{ course.coursePrice }}&#8353;</div>
+            </div>
+            <br />
+            <div class="text">
+              Creado el :
+              {{ course.createdAt | amLocale: "es" | amDateFormat: "LL" }}
+            </div>
+            <div class="pull-right">
+              <div class="text">
+                Ultima Actualización :
+                {{ course.updatedAt | amLocale: "es" | amTimeAgo }}
+              </div>
+            </div>
+          </div>
+
+          <!-- Featured Dropdown Box -->
+          <div class="eps_dots more_dropdown">
+            <a href="#"><span></span><i></i></a>
+            <div class="dropdown-content">
+              <span><i class="flaticon-share"></i>Compartir</span>
+              <span><i class="flaticon-down-arrow-1"></i>Guardar</span>
+              <span><i class="flaticon-edit-2"></i>Reportar</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Pagination -->
+  <div class="container mt-2" style="background-color: transparent !important">
+    <div class="row">
+      <pagination-controls
+        class="styled-pagination ml-auto mr-auto"
+        (pageChange)="p = $event"
+        previousLabel="<"
+        nextLabel=">"
+        directionLinks="false"
+        autoHide="true"
+      ></pagination-controls>
+    </div>
+  </div>
+  <!-- END Pagination -->
+</div>

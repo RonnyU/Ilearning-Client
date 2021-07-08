@@ -1,0 +1,110 @@
+<section
+  class="signup-section login-section"
+  style="background-image: url(../../../assets/images/background/pattern-4.png)"
+>
+  <div class="auto-container">
+    <div class="logo"></div>
+    <div class="inner-container">
+      <h2>
+        Bienvendio de nuevo
+        <br />
+        <span class="theme_color">Comuna Colectivo Creativo</span>
+      </h2>
+      <div class="text">Inicia sesión para comenzar a aprender</div>
+
+      <!-- Login Form -->
+      <div class="styled-form">
+        <form
+          method="post"
+          #loginform="ngForm"
+          (ngSubmit)="onSubmit(loginform)"
+        >
+          <!-- Form Group -->
+          <div class="form-group">
+            <input
+              type="text"
+              name="identificacion"
+              value=""
+              placeholder="Identificación"
+              #identity="ngModel"
+              [(ngModel)]="user.identity"
+              required
+            />
+          </div>
+
+          <!-- Form Group -->
+          <div class="form-group">
+            <input
+              type="password"
+              name="password"
+              value=""
+              placeholder="Contraseña"
+              #password="ngModel"
+              [(ngModel)]="user.password"
+              required
+            />
+            <small
+              *ngIf="!password.valid && password.touched"
+              class="invalid-feedback d-block"
+            >
+              La cotraseña debe contener minimo 8 caracteres, al menos una letra
+              mayuscula, una letra minuscula, un numero y un caracter especial
+              <br /><br />
+              NOTA: la letra 'ñ' no esta permitida.
+            </small>
+          </div>
+
+          <div class="form-group">
+            <div class="clearfix">
+              <div class="pull-left">
+                <div class="check-box">
+                  <input type="checkbox" name="remember-password" id="type-1" />
+                  <label for="type-1">Recordar contraseña</label>
+                </div>
+              </div>
+              <div class="pull-right">
+                <a (click)="noavailable()" style="color: gray" class="forgot"
+                  >¿Has olvidado la contraseña?</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group text-center">
+            <button id="btn-login" type="submit" class="btn-style-one">
+              <div
+                class="spinner-border spinner-border-sm loading hide"
+                role="status"
+              >
+                <span class="cargando">Cargando...</span>
+              </div>
+              <span class="txt">Iniciar sesión</span>
+            </button>
+          </div>
+
+          <div class="form-group">
+            <div class="users">
+              ¿Aún no tienes una cuenta?
+              <a [routerLink]="['/registro']">¡Regístrate ahora!</a>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="social-boxed text-center">
+        <a (click)="noavailable()" style="color: white"
+          ><span class="icon fab fa-facebook"></span>Continuar con Facebook</a
+        >
+        <a class="linkedin" (click)="noavailable()" style="color: white"
+          ><span class="icon fab fa-linkedin"></span>Continuar con Linkedin</a
+        >
+        <a class="twitter" (click)="noavailable()" style="color: white"
+          ><span class="icon fab fa-twitter"></span>Continuar con Twitter</a
+        >
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="copyright">Copyright © 2020 Comuna</div>
+  </div>
+</section>

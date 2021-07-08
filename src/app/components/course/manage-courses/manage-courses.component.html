@@ -1,0 +1,213 @@
+<ng-template #editCourseModal let-modal style="z-index: 600000">
+  <form #editCourseForm="ngForm">
+    <div class="modal-header">
+      <h4 class="modal-title">Editar valores del curso</h4>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="modal.close(false)"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-6">
+          <label for="inputEmail4" class="form-label">Titulo del curso</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="toUpdate.title"
+            name="title"
+            id="inputEmail4"
+          />
+        </div>
+        <div class="col-md-6">
+          <label for="inputPassword4" class="form-label">Precio</label>
+          <input
+            type="text"
+            class="form-control"
+            name="coursePrice"
+            id="inputPassword4"
+            [(ngModel)]="toUpdate.coursePrice"
+          />
+        </div>
+        <div class="col-12">
+          <label for="inputAddress" class="form-label">Descripción</label>
+          <textarea
+            [froalaEditor]="options"
+            name="courseDesc"
+            [(ngModel)]="toUpdate.courseDesc"
+            [(froalaModel)]="toUpdate.courseDesc"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close(false)">
+        Cancelar
+      </button>
+      <button
+        type="submit"
+        class="btn btn-comuna"
+        (click)="commitEditCourse(editCourseForm)"
+      >
+        Confirmar cambios
+      </button>
+    </div>
+  </form>
+</ng-template>
+
+<div class="manage-cource-section">
+  <div class="auto-container">
+    <div class="sec-title">
+      <div class="clearfix">
+        <div class="pull-left">
+          <h4>Administrar Cursos</h4>
+        </div>
+        <div class="pull-right">
+          <button
+            type="button"
+            class="btn-style-one"
+            [routerLink]="['/curso/nuevo']"
+          >
+            <span class="txt">Crear nuevo curso</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="inner-container pb-3">
+      <div class="container-content">
+        <table class="table">
+          <thead>
+            <tr class="text-center">
+              <th scope="col">Título</th>
+              <th scope="col">Capitulos</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Fecha de creacion</th>
+              <th scope="col">Ultima fecha de modificacion</th>
+              <th scope="col">Alumnos</th>
+              <th scope="col">Dinero generado</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let course of courses; let i = index">
+            <tr class="text-center">
+              <th
+                class="title pointer"
+                scope="col"
+                [routerLink]="['/curso/editar', course._id]"
+              >
+                {{ course.title }}
+              </th>
+
+              <th scope="col">
+                {{ course.chapter.length }}
+              </th>
+
+              <th scope="col">{{ course.coursePrice }}</th>
+              <th scope="col">
+                {{ course.createdAt | date }}
+              </th>
+              <th scope="col">
+                {{ course.createdAt | amLocale: "es" | amTimeAgo }}
+              </th>
+              <th scope="col">
+                {{ course.purchases }}
+              </th>
+              <th class="sales" scope="col">
+                {{ course.Profits }}
+              </th>
+              <th class="actions" scope="col">
+                <a
+                  (click)="editCourse(course._id, editCourseModal)"
+                  class="flaticon-edit-2"
+                  style="color: #0d58a8"
+                ></a>
+                <a
+                  class="fa fa-eye"
+                  style="color: #0da870"
+                  *ngIf="course.activeCourse"
+                  (click)="switchCourseStatus(0, course._id)"
+                ></a>
+                <a
+                  class="fa fa-eye-slash"
+                  style="color: gray"
+                  *ngIf="!course.activeCourse"
+                  (click)="switchCourseStatus(1, course._id)"
+                ></a>
+                <a
+                  data-toggle="modal"
+                  [attr.data-target]="'#myModal' + course._id"
+                  class="fa fa-trash text-danger"
+                ></a>
+              </th>
+            </tr>
+            <!-- The Modal -->
+            <div class="modal fade" id="myModal{{ course._id }}">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <h4 class="modal-title">
+                      ¿Seguro que quieres borrar este curso?
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal">
+                      &times;
+                    </button>
+                  </div>
+
+                  <!-- Modal body -->
+                  <div class="modal-body">Borrar {{ course.title }}</div>
+
+                  <!-- Modal footer -->
+                  <div class="modal-footer">
+                    <a
+                      (click)="deleteCourse(course._id)"
+                      class="btn btn-danger"
+                      data-dismiss="modal"
+                      >borrar</a
+                    >
+                    <button
+                      type="button"
+                      class="btn btn-warning"
+                      data-dismiss="modal"
+                    >
+                      Cerrar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- END  Modal -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="styled-pagination margin-top text-center">
+      <ul class="clearfix">
+        <li class="arrow">
+          <a [routerLink]="['/curso/manage-courses', prevPage]"
+            ><span class="fa fa-angle-left"></span>
+          </a>
+        </li>
+        <li class="prev">
+          <a [routerLink]="['/curso/manage-courses', prevPage]">Atras</a>
+        </li>
+        <li *ngFor="let num of numberPages">
+          <a [routerLink]="['/curso/manage-courses', num]">{{ num }}</a>
+        </li>
+        <li class="next">
+          <a [routerLink]="['/curso/manage-courses', nextPage]">Siguiente</a>
+        </li>
+        <li class="arrow">
+          <a [routerLink]="['/curso/manage-courses', nextPage]"
+            ><span class="fa fa-angle-right"></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

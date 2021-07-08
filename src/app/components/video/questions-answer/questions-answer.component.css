@@ -1,0 +1,23 @@
+.quote {
+  color: rgb(43, 121, 223);
+  padding-right: 7px;
+}
+
+.card .read-more:hover {
+  font-size: 14px;
+}
+
+.card:hover {
+  box-shadow: 2px 2px 2px rgb(43, 121, 223);
+  transform: scale(0.99);
+}
+
+.card {
+  border: 1px solid gainsboro;
+  transition: 0.3s;
+  margin: 0.5rem;
+}
+
+.card-body {
+  padding: 20px 20px 10px 20px;
+}

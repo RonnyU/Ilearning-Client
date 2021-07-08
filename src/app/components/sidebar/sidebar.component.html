@@ -1,0 +1,36 @@
+<div class="sidenav-list">
+  <ul class="navbar">
+    <li>
+      <a [routerLink]="['']"
+        ><i class="icon flaticon-home"></i>
+        <span><i class="flaticon-home"></i> Pagina principal</span></a
+      >
+    </li>
+    <!-- Para el usuario -->
+    <li>
+      <a [routerLink]="['']"
+        ><i class="icon flaticon-home"></i>
+        <span><i class="flaticon-home"></i> Listado de categorías</span></a
+      >
+    </li>
+    <li>
+      <a [routerLink]="['/estudiante/perfil']"
+        ><i class="icon flaticon-home"></i>
+        <span><i class="flaticon-home"></i>Cursos Comprados</span></a
+      >
+    </li>
+    <li>
+      <a [routerLink]="['/instructor/perfil', identity._id]"
+        ><i class="icon flaticon-home"></i>
+        <span><i class="flaticon-home"></i>Cursos Propios</span></a
+      >
+    </li>
+    <!-- Para el instructor -->
+    <li>
+      <a [routerLink]="['configuracion/cuenta']"
+        ><i class="icon flaticon-home"></i>
+        <span><i class="flaticon-home"></i>Configuracion</span></a
+      >
+    </li>
+  </ul>
+</div>

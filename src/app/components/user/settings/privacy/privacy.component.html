@@ -1,0 +1,136 @@
+<!-- Setting Section -->
+<div class="setting-section">
+  <div class="auto-container">
+    <!-- Sec Title -->
+    <div class="sec-title">
+      <h4>Configuracón</h4>
+    </div>
+    <div class="inner-container">
+      <!-- Setting Info Tabs-->
+      <div class="setting-info-tabs">
+        <!-- Setting Tabs-->
+        <div class="setting-tabs tabs-box">
+          <!-- Tab Btns -->
+          <ul class="tab-btns tab-buttons clearfix">
+            <li class="tab-btn" [routerLink]="['/configuracion/cuenta']">
+              Cuenta
+            </li>
+            <li class="tab-btn">Notificación</li>
+            <li class="tab-btn">Pagos</li>
+            <li
+              class="active-btn tab-btn"
+              [routerLink]="['/configuracion/privacidad']"
+            >
+              Privacidad
+            </li>
+            <li class="tab-btn" [routerLink]="['/configuracion/cerrar-cuenta']">
+              Cerrar Cuenta
+            </li>
+          </ul>
+
+          <!-- Tabs Container -->
+          <div class="tabs-content">
+            <!-- Tab / Active Tab -->
+            <h6>Privacidad</h6>
+            <div class="text">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </div>
+            <div class="content">
+              <h6>Password</h6>
+              <div class="text">Cambiar contraseña</div>
+
+              <!-- Setting Form -->
+              <div class="setting-form">
+                <!-- Setting Form -->
+                <form
+                  method="post"
+                  #privacyForm="ngForm"
+                  (ngSubmit)="onSubmit(privacyForm)"
+                >
+                  <div class="row clearfix">
+                    <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                      <input
+                        type="password"
+                        name="currentpassword"
+                        placeholder="Contraseña actual*"
+                        #currentpassword="ngModel"
+                        [(ngModel)]="pass.currentpassword"
+                        required
+                        pattern="(.|\s)*\S(.|\s)*"
+                      />
+                      <small
+                        *ngIf="
+                          !currentpassword.valid && currentpassword.touched
+                        "
+                        class="invalid-feedback d-block"
+                      >
+                        El campo no puede estar vacio
+                      </small>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 form-group"></div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                      <input
+                        type="password"
+                        name="newpassword"
+                        placeholder="contraseña nueva*"
+                        #newpassword="ngModel"
+                        [(ngModel)]="pass.newpassword"
+                        required
+                        pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#_?¿!@$%^&*-]).{8,}$"
+                      />
+                      <small
+                        *ngIf="!newpassword.valid && newpassword.touched"
+                        class="invalid-feedback d-block"
+                      >
+                        La cotraseña debe contener minimo 8 caracteres, al menos
+                        una letra mayuscula, una letra minuscula, un numero y un
+                        caracter especial
+                        <br /><br />
+                        NOTA: la letra 'ñ' no esta permitida.
+                      </small>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                      <input
+                        type="password"
+                        name="confirmpassword"
+                        placeholder="repetir contraseña*"
+                        [(ngModel)]="pass.confirmpassword"
+                        required
+                      />
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                      <button
+                        class="theme-btn btn-style-one"
+                        type="submit"
+                        name="submit-form"
+                        [disabled]="privacyForm.invalid"
+                      >
+                        <span class="txt">Guardar Cambios</span>
+                      </button>
+                      <button
+                        class="theme-btn btn-style-two"
+                        type="submit"
+                        name="submit-form"
+                      >
+                        <span class="txt">Cancelar</span>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!--End Comment Form -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Setting Section -->

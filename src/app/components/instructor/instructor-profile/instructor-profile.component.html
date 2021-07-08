@@ -1,0 +1,148 @@
+<!-- Instructor Page Section -->
+<div class="instructor-page-section">
+  <div class="auto-container">
+    <div class="upper-content">
+      <div class="row clearfix">
+        <!-- Left Column -->
+        <div class="left-column col-lg-9 col-md-12 col-sm-12">
+          <!-- Content -->
+          <div class="content">
+            <!-- Author Image -->
+            <div class="author-image">
+              <img
+                src="{{ url + 'user/avatar/' + user.imagePath }}"
+                alt="Imagen del avatar"
+              />
+            </div>
+            <h4>{{ user.name + " " + user.surname }}</h4>
+            <div class="designation">
+              {{ user.profesion }}
+            </div>
+            <ul class="social-box">
+              <li class="facebook">
+                <a class="fab fa-facebook-f"></a>
+              </li>
+              <li class="google"><a class="fab fa-google"></a></li>
+              <li class="twitter"><a class="fab fa-twitter"></a></li>
+            </ul>
+
+            <!-- Fact Counter -->
+            <div class="fact-counter">
+              <div class="row clearfix">
+                <!-- Column -->
+                <div class="column counter-column col-lg-3 col-md-6 col-sm-12">
+                  <div class="inner">
+                    <h5 class="counter-title">Estudiantes</h5>
+                    <div class="count-outer count-box">
+                      <span
+                        class="count-text"
+                        data-speed="2500"
+                        data-stop="21"
+                        >{{ countStudents }}</span
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Column -->
+                <div class="column counter-column col-lg-3 col-md-6 col-sm-12">
+                  <div class="inner">
+                    <h5 class="counter-title">Cursos</h5>
+                    <div class="count-outer count-box">
+                      <span
+                        class="count-text"
+                        data-speed="3000"
+                        data-stop="15"
+                        >{{ countCourses }}</span
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Column -->
+                <div class="column counter-column col-lg-3 col-md-6 col-sm-12">
+                  <div class="inner">
+                    <h5 class="counter-title">Reviews</h5>
+                    <div class="count-outer count-box">
+                      <span class="count-text" data-speed="3000" data-stop="100"
+                        >0</span
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Column -->
+                <div class="column counter-column col-lg-3 col-md-6 col-sm-12">
+                  <div class="inner">
+                    <h5 class="counter-title">Seguidores</h5>
+                    <div class="count-outer count-box">
+                      <span class="count-text" data-speed="3000" data-stop="25"
+                        >0</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Right Column -->
+        <div class="right-column col-lg-3 col-md-12 col-sm-12">
+          <div class="buttons-box">
+            <a
+              [routerLink]="['/configuracion/cuenta']"
+              class="theme-btn btn-style-two"
+              ><span class="txt"
+                ><i class="flaticon-settings-1"></i> Configuración</span
+              ></a
+            >
+            <a
+              [routerLink]="['/configuracion/cuenta']"
+              class="theme-btn btn-style-one"
+              ><span class="txt"
+                ><i class="flaticon-edit"></i>Editar Perfil</span
+              ></a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lower Content -->
+    <div class="lower-content">
+      <!-- Instructor Info Tabs-->
+      <div class="instructor-info-tabs">
+        <!-- Instructor Tabs-->
+        <div class="instructor-tabs tabs-box">
+          <!-- Tab Btns -->
+          <ul class="tab-btns tab-buttons clearfix">
+            <li data-tab="#prod-about" class="active-btn tab-btn">Perfil</li>
+            <li data-tab="#prod-courses" class="tab-btn">Cursos</li>
+            <li data-tab="#prod-discussion" class="tab-btn">Foros</li>
+          </ul>
+
+          <!-- Tabs Container -->
+          <!-- Tabs Container -->
+          <div class="tabs-content">
+            <!-- Tab / Active Tab -->
+            <div class="tab active-tab" id="prod-about">
+              <div class="content">
+                <h6>Acerca de mi</h6>
+                <div class="text">
+                  <p [innerHTML]="user.userDesc"></p>
+                </div>
+              </div>
+            </div>
+            <div class="tab" id="prod-discussion">
+              <app-instructor-discussion>0</app-instructor-discussion>
+            </div>
+            <div class="tab" id="prod-courses">
+              <app-instructor-courses [id]="userId"></app-instructor-courses>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Instructor Page Section -->

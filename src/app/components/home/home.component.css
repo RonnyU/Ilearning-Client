@@ -1,0 +1,13 @@
+.course-card {
+  min-height: 226px !important;
+  max-height: 226px !important;
+}
+.module h2 {
+  font-size: 12px !important;
+}
+h2 {
+  font-size: 12px !important;
+}
+.sidebar-page-container {
+  padding-top: 0px !important;
+}

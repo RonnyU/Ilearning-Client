@@ -1,0 +1,107 @@
+<div class="auto-container">
+  <div class="inner-container">
+    <!-- Setting Info Tabs-->
+    <div class="setting-info-tabs">
+      <!-- Setting Tabs-->
+      <div class="setting-tabs tabs-box">
+        <!-- Tabs Container -->
+        <div class="tabs-content">
+          <!-- Tab / Active Tab -->
+          <h6>Haz un comentario</h6>
+          <!-- Setting Form -->
+          <div class="setting-form">
+            <!-- Setting Form -->
+            <form
+              method="post"
+              #commentsForm="ngForm"
+              (ngSubmit)="onSubmit(commentsForm)"
+            >
+              <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                  <input
+                    style="
+                      background-color: white;
+                      border-color: gainsboro;
+                      border-radius: 10px 10px 10px 10px;
+                    "
+                    type="text"
+                    name="title"
+                    placeholder="Titulo*"
+                    #title="ngModel"
+                    [(ngModel)]="comment.title"
+                    [required]
+                    pattern="(.|\s)*\S(.|\s)*"
+                  />
+                  <small
+                    *ngIf="!title.valid && title.touched"
+                    class="invalid-feedback d-block"
+                  >
+                    El campo no puede estar vacio
+                  </small>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 mb-1">
+                  <textarea
+                    [froalaEditor]="options"
+                    name="content"
+                    class="form-control"
+                    #content="ngModel"
+                    [(ngModel)]="comment.content"
+                    [(froalaModel)]="comment.content"
+                  ></textarea>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                  <button
+                    class="theme-btn btn-style-two"
+                    type="submit"
+                    name="submit-form"
+                    [disabled]="commentsForm.invalid"
+                  >
+                    <span class="txt">Comentar</span>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="content">
+            <h6>Comentarios</h6>
+            <div class="card" *ngFor="let com of commentsTS">
+              <div class="card-body">
+                <span
+                  class="badge badge-primary badge-pill"
+                  style="float: right"
+                  >0</span
+                >
+                <h5
+                  class="card-title pointer title"
+                  [routerLink]="['/curso/video/comments', videoTS, com._id]"
+                >
+                  {{ com.title }}
+                </h5>
+                <p
+                  class="card-text pointer"
+                  [innerHTML]="com.content"
+                  [routerLink]="['/curso/video/comments', videoTS, com._id]"
+                  style="color: gray"
+                ></p>
+                <footer class="blockquote-footer">
+                  <span
+                    class="quote pointer"
+                    [routerLink]="['/instructor/perfil', com.user._id]"
+                    >{{ com.user.name + com.user.surname }}</span
+                  >
+                  <cite title="Source Title"
+                    ><i class="fa fa-caret-right" aria-hidden="true"></i>
+                    {{ com.updatedAt | amLocale: "es" | amTimeAgo }}</cite
+                  >
+                </footer>
+              </div>
+            </div>
+            <!--End Comment Form -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,203 @@
+<!-- Confirm edit modal -->
+<ng-template #editComment let-modal style="z-index: 600000">
+  <div class="modal-header">
+    <h4 class="modal-title">Editar comentario</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form method="post" #updatecommentsForm="ngForm">
+      <div
+        class="col-lg-12 col-md-12 col-sm-12 form-group"
+        *ngIf="commentFU.id == commentId"
+      >
+        <input
+          style="border-radius: 10px 10px 10px 10px"
+          class="form-control"
+          type="text"
+          name="title"
+          placeholder="Titulo*"
+          #title="ngModel"
+          [(ngModel)]="commentFU.title"
+          [required]
+          pattern="(.|\s)*\S(.|\s)*"
+        />
+        <small
+          *ngIf="!title.valid && title.touched"
+          class="invalid-feedback d-block"
+        >
+          El campo no puede estar vacio
+        </small>
+      </div>
+      <div
+        class="col-lg-12 col-md-12 col-sm-12 form-group"
+        *ngIf="commentFU.id != commentId"
+      ></div>
+      <div class="col-lg-12 col-md-12 col-sm-12 mb-1">
+        <textarea
+          [froalaEditor]="options"
+          name="content"
+          class="form-control"
+          #content="ngModel"
+          [(ngModel)]="commentFU.content"
+          [(froalaModel)]="commentFU.content"
+        ></textarea>
+      </div>
+
+      <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+        <button
+          class="theme-btn btn-style-one mt-2"
+          type="button"
+          name="editform"
+          (click)="editMainComment()"
+        >
+          <span class="txt">Comentar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close(false)">
+      Cancelar
+    </button>
+  </div>
+</ng-template>
+<!-- End of edit modal -->
+
+<!-- Confirm deletion modal -->
+<ng-template #deleteComment let-modal style="z-index: 600000">
+  <div class="modal-header">
+    <h4 class="modal-title">Confirmar borrado</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <span>¿Estás seguro de querer eliminar este elemento?</span>
+    <p></p>
+    <small>Esta acción no se puede reversar.</small>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close(false)">
+      Cancelar
+    </button>
+    <button type="button" class="btn btn-danger" (click)="modal.close(true)">
+      Confirmar
+    </button>
+  </div>
+</ng-template>
+<!-- END Confirm deletion modal -->
+<div class="container mt-5 mb-5">
+  <div class="card">
+    <div class="card-body">
+      <div *ngIf="identity && identity._id == comment.user._id">
+        <span class="ml-2 pointer">
+          <a
+            class="fa fa-pencil-square-o ml-2 pointer"
+            style="float: right"
+            (click)="openMainModal(editComment, 0, comment._id)"
+          ></a>
+        </span>
+
+        <i
+          class="fa fa-trash pointer"
+          style="float: right"
+          (click)="openModalFDelete(deleteComment, 0, comment._id)"
+        ></i>
+      </div>
+
+      <h5 class="card-title">
+        {{ comment.title }}
+      </h5>
+      <p
+        class="card-text"
+        [innerHTML]="comment.content"
+        style="color: gray"
+      ></p>
+      <footer class="blockquote-footer">
+        <span class="quote pointer">{{
+          comment.user.name + comment.user.surname
+        }}</span>
+        <cite title="Source Title"
+          ><i class="fa fa-caret-right" aria-hidden="true"></i>
+          {{ comment.updatedAt | amLocale: "es" | amTimeAgo }}</cite
+        >
+      </footer>
+    </div>
+  </div>
+
+  <div class="setting-form">
+    <!-- Setting Form -->
+    <form
+      method="post"
+      #commentsForm="ngForm"
+      (ngSubmit)="onSubmit(commentsForm)"
+    >
+      <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 mb-1">
+          <textarea
+            [froalaEditor]="options"
+            ngModel
+            name="content"
+            class="form-control"
+          ></textarea>
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+          <button
+            class="theme-btn btn-style-one"
+            type="submit"
+            name="submit-form"
+          >
+            <span class="txt">Comentar</span>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <hr />
+  <br />
+  <h6>Respuestas</h6>
+  <div class="p-2">
+    <ul class="list-group list-group-flush mt-2" *ngFor="let com of comments">
+      <li class="list-group-item" style="border-radius: 30px 30px 30px 30px">
+        <div *ngIf="identity && identity._id == com.user._id">
+          <span class="ml-2 pointer">
+            <a
+              class="fa fa-pencil-square-o ml-2 pointer"
+              style="float: right"
+              (click)="openMainModal(editComment, 1, com._id)"
+            ></a>
+          </span>
+
+          <i
+            class="fa fa-trash pointer"
+            style="float: right"
+            (click)="openModalFDelete(deleteComment, 1, com._id)"
+          ></i>
+        </div>
+        <p class="p-2 text" style="color: gray" [innerHTML]="com.content"></p>
+        <footer class="blockquote-footer mt-3">
+          <span class="quote pointer">{{
+            com.user.name + com.user.surname
+          }}</span>
+          <cite title="Source Title"
+            ><i class="fa fa-caret-right" aria-hidden="true"></i>
+            {{ com.updatedAt | amLocale: "es" | amTimeAgo }}</cite
+          >
+        </footer>
+      </li>
+    </ul>
+  </div>
+</div>

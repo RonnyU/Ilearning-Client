@@ -1,0 +1,200 @@
+<!-- Course Detail Section -->
+<div class="course-detail-section">
+  <div class="feature-block-two hide col-lg-12 col-md-12 col-sm-12">
+    <div class="inner-box">
+      <div class="content text-center px-0">
+        <div class="sec-title">
+          <div class="clearfix">
+            <h3>Lamentablemente no pudimos encontrar el curso que buscabas.</h3>
+            <p>Intenta buscando algún otro curso.</p>
+            <h3 class="mt-5">
+              <span class="icon fa fa-search"></span>
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="auto-container">
+    <div class="upper-content">
+      <div class="row clearfix">
+        <!-- Left Column -->
+        <div class="left-column col-lg-4 col-md-12 col-sm-12">
+          <div class="inner-column" *ngIf="data.videoPath == null">
+            <!-- Video Box -->
+            <div
+              class="intro-video"
+              [ngStyle]="{ 'background-image': 'url(' + imageUrl + ')' }"
+              style="background-position: center"
+            >
+              <h4 class="text-light w-50 mx-auto">
+                Comienza a aprender con: {{ data.title }}
+              </h4>
+            </div>
+          </div>
+          <div class="inner-column" *ngIf="data.videoPath != null">
+            <!-- Video Box -->
+            <div>
+              <video
+                controls
+                style="max-width: 100%; min-height: 500px"
+                poster="{{ url + 'video/getVideo/' + data.videoPath }}"
+              >
+                <source src="{{ url }}/video/getVideo/{{ data.videoPath }}" />
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="right-column col-lg-8 col-md-12 col-sm-12">
+          <div class="inner-column">
+            <h2>{{ data.title }}</h2>
+
+            <div class="price">
+              Este curso tiene un precio de: <span>{{ data.coursePrice }}</span>
+            </div>
+            <div class="text text-v-truncated">
+              <span
+                class=""
+                style="max-height: 100px"
+                [innerHTML]="data.courseDesc"
+              ></span>
+            </div>
+            <div class="buttons-box">
+              <a
+                id="buy-button"
+                (click)="buyCourse()"
+                class="theme-btn btn-style-one mt-3"
+                ><span class="txt text-white">Comprar</span></a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course Detail Info Boxed -->
+      <div class="course-detail-info-boxed">
+        <div class="clearfix">
+          <div class="pull-left">
+            <div class="author">
+              <div class="user-image">
+                <img
+                  src="../../../../assets/images/resource/author-14.jpg"
+                  alt=""
+                />
+              </div>
+              Kerry Oaky
+            </div>
+            <!-- Follow -->
+            <div class="follow"><a href="#">+ Suscríbete</a></div>
+          </div>
+          <div class="pull-right">
+            <ul class="social-box">
+              <li class="share">Compartir</li>
+              <li class="facebook"><a href="#" class="fab fa-facebook"></a></li>
+              <li class="google"><a href="#" class="fab fa-google"></a></li>
+              <li class="twitter"><a href="#" class="fab fa-twitter"></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- End Course Detail Info Boxed -->
+    </div>
+
+    <!-- Lower Content -->
+    <div class="lower-content">
+      <!-- Instructor Info Tabs-->
+      <div class="instructor-info-tabs">
+        <!-- Instructor Tabs-->
+        <div class="instructor-tabs tabs-box">
+          <!-- Tab Btns -->
+          <ul class="tab-btns tab-buttons clearfix">
+            <li data-tab="#course-content" class="active-btn tab-btn">
+              Contenido del curso
+            </li>
+            <li data-tab="#course-info" class="tab-btn">Información</li>
+          </ul>
+
+          <!-- Tabs Container -->
+          <div class="tabs-content">
+            <!-- Tab / Active Tab -->
+
+            <!-- Tab  -->
+            <div class="tab active-tab" id="course-content">
+              <div class="content">
+                <ul class="accordion-box">
+                  <!-- Block -->
+                  <li
+                    *ngFor="
+                      let chap of data.chapter | sort: 'position';
+                      let i = index
+                    "
+                    class="accordion block"
+                    [ngClass]="i == 0 ? ' active-block' : ''"
+                  >
+                    <div
+                      class="acc-btn"
+                      [ngClass]="i == 0 ? ' active pb-3' : 'pb-4'"
+                    >
+                      <div class="icon-outer">
+                        <span class="icon icon-plus flaticon-down-arrow"></span>
+                      </div>
+                      Capítulo {{ i + 1 }}. <span> </span>
+                      {{ chap.chapterName }}
+                    </div>
+                    <div
+                      class="acc-content"
+                      [ngClass]="i == 0 ? ' current' : ''"
+                    >
+                      <div
+                        class="sec-title text-left px-5 lightbox-image play-icon"
+                        style="font-size: 15px; line-height: normal"
+                      >
+                        <span></span>
+                      </div>
+                      <div
+                        *ngFor="
+                          let lesson of data.chapter[i].lesson
+                            | sort: 'position';
+                          let indice = index
+                        "
+                        class="content"
+                      >
+                        <div class="clearfix">
+                          <div class="pull-left">
+                            <span
+                              class="lightbox-image play-icon pointer lesson-item"
+                              ><span class="fa"
+                                ><i
+                                  class="fas fa-arrow-right"
+                                  style="margin-top: 12px"
+                                ></i></span
+                              ><span class="font-weight-bold"
+                                >Lección {{ indice + 1 }}</span
+                              >
+                              - {{ lesson.lessonName }}</span
+                            >
+                          </div>
+                          <div class="pull-right">
+                            <div class="minutes">Duración</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- Block -->
+                </ul>
+              </div>
+            </div>
+            <div class="tab" id="course-info">
+              <div class="content">
+                <span [innerHTML]="data.courseDesc"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

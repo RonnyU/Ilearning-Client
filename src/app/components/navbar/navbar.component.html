@@ -1,0 +1,277 @@
+<header class="main-header shadow">
+  <!-- Header Upper -->
+  <div class="header-upper">
+    <div class="outer-container">
+      <div class="clearfix">
+        <!-- Header Left -->
+        <div class="header-left clearfix">
+          <!-- Left Sidebar Btn -->
+          <div
+            class="left-sidebar-btn hidden-bar-opener"
+            style="background-color: white"
+          >
+            <span class="icon flaticon-menu-2 text-black-50"></span>
+          </div>
+
+          <div class="pull-left logo-box">
+            <div class="logo row">
+              <h1
+                style="display: inline-flex; color: #22548e; font-size: 36px"
+                class="align-middle my-auto pointer"
+                [routerLink]="['/inicio']"
+              >
+                ILearning
+              </h1>
+            </div>
+          </div>
+
+          <!-- Search -->
+          <div class="search-box">
+            <form
+              #searchCourse="ngForm"
+              (ngSubmit)="search(searchCourse.value)"
+            >
+              <div class="form-group">
+                <input
+                  type="search"
+                  name="searchValue"
+                  placeholder="Nombre del curso a buscar..."
+                  (keyup)="search(searchCourse.value)"
+                  required
+                  ngModel
+                />
+                <button type="submit">
+                  <span class="icon fa fa-search"></span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Header Right -->
+        <div class="header-right clearfix">
+          <div class="nav-outer clearfix">
+            <!-- Main Menu -->
+            <nav class="main-menu navbar-expand-md">
+              <div class="navbar-header">
+                <button
+                  class="navbar-toggler"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation"
+                >
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+              </div>
+
+              <div
+                class="navbar-collapse collapse clearfix"
+                id="navbarSupportedContent"
+              >
+                <ul class="navigation clearfix">
+                  <li
+                    class="dropdown"
+                    *ngIf="identity && identity.role == 'ROLE_INSTRUCTOR'"
+                  >
+                    <a [routerLink]="['/instructor/perfil', identity._id]"
+                      >Instructor</a
+                    >
+                    <ul>
+                      <li>
+                        <a [routerLink]="['/curso/manage-courses']"
+                          >Administrar Cursos</a
+                        >
+                      </li>
+                      <li *ngIf="identity">
+                        <a [routerLink]="['/instructor/perfil', identity._id]"
+                          >Perfil</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li
+                    class="dropdown"
+                    *ngIf="
+                      (identity && identity.role == 'ROLE_STUDENT') ||
+                      (identity && identity.role == 'ROLE_INSTRUCTOR')
+                    "
+                  >
+                    <a [routerLink]="['/estudiante/perfil']">Estudiante</a>
+                    <ul>
+                      <li>
+                        <a [routerLink]="['/estudiante/perfil']">Perfil</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+
+          <!-- Options Box -->
+          <div class="options-box clearfix">
+            <!-- Message Box -->
+            <div class="message-box hide">
+              <a href="#" class="icon flaticon-envelope"></a>
+            </div>
+            <!-- End Message Box -->
+
+            <!-- Profile Box -->
+            <div class="profile-box dropdown" id="someElementID5">
+              <div class="btn btn-default dropdown-toggle">
+                <span *ngIf="identity" class="profile-image"
+                  ><img
+                    src="{{ url + 'user/avatar/' + identity.imagePath }}"
+                    alt=""
+                    class=""
+                /></span>
+
+                <span
+                  *ngIf="identity == null || !identity.imagePath"
+                  class="profile-image"
+                  ><img
+                    src="../../../assets/images/resource/72-729756_how-to-add-a-new-user-to-your.jpg"
+                    alt=""
+                /></span>
+              </div>
+              <div class="profile-content">
+                <div *ngIf="identity" class="setting">
+                  <a [routerLink]="['/configuracion/cuenta']" class="ml-auto">{{
+                    identity.name + " " + identity.surname
+                  }}</a>
+                </div>
+
+                <!-- Pages -->
+                <ul class="pages">
+                  <li *ngIf="!identity">
+                    <a [routerLink]="['/login']">Iniciar Sesión</a>
+                  </li>
+                  <li *ngIf="!identity">
+                    <a [routerLink]="['/registro']">Registro</a>
+                  </li>
+                  <li *ngIf="identity">
+                    <a (click)="noavailable()">Feedback</a>
+                  </li>
+                  <li><a (click)="noavailable()">Contáctanos</a></li>
+                  <li *ngIf="identity">
+                    <a [routerLink]="['/configuracion/cuenta']"
+                      >Configuración</a
+                    >
+                  </li>
+                  <li *ngIf="identity">
+                    <a class="pointer" (click)="logOut()">Cerrar sesión</a>
+                  </li>
+                  <li><a (click)="noavailable()">Ayuda</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--End Header Upper-->
+
+  <!-- Mobile Menu  -->
+  <div class="mobile-menu">
+    <div class="menu-backdrop"></div>
+    <div class="close-btn"><span class="icon fa fa-remove"></span></div>
+
+    <nav class="menu-box">
+      <div class="nav-logo"></div>
+      <div class="menu-outer">
+        <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+      </div>
+    </nav>
+  </div>
+  <!-- End Mobile Menu -->
+</header>
+<section class="hidden-bar left-align" style="z-index: 20000">
+  <div class="color-layer"></div>
+  <div class="hidden-bar-closer">
+    <span class="flaticon-multiply"></span>
+  </div>
+  <!-- Hidden Bar Wrapper -->
+  <div class="hidden-bar-wrapper">
+    <ul class="pages-list">
+      <li class="active">
+        <a [routerLink]="['/inicio']"
+          ><span class="icon flaticon-home"></span>Pagina principal</a
+        >
+      </li>
+    </ul>
+    <div
+      class="heading profile-content"
+      *ngIf="identity && identity.role == 'ROLE_INSTRUCTOR'"
+    >
+      Instructor
+    </div>
+    <ul
+      class="pages-list"
+      *ngIf="identity && identity.role == 'ROLE_INSTRUCTOR'"
+    >
+      <li>
+        <a [routerLink]="['/curso/manage-courses']"
+          ><span class="icon flaticon-category"></span>Administar cursos</a
+        >
+      </li>
+      <li>
+        <a [routerLink]="['/instructor/perfil', identity._id]"
+          ><span class="icon flaticon-category"></span>Perfil</a
+        >
+      </li>
+    </ul>
+    <div class="heading" *ngIf="identity">Estudiante</div>
+    <ul class="pages-list" *ngIf="identity">
+      <li>
+        <a [routerLink]="['/estudiante/perfil']"
+          ><span class="icon flaticon-right-arrow"></span>Perfil</a
+        >
+      </li>
+    </ul>
+    <div class="heading">Acciones</div>
+    <ul class="pages-list">
+      <li *ngIf="identity">
+        <a [routerLink]="['/configuracion/cuenta']"
+          ><span class="icon flaticon-right-arrow"></span>Configuración</a
+        >
+      </li>
+      <li *ngIf="identity">
+        <a class="pointer" (click)="logOut()"
+          ><span class="icon flaticon-right-arrow"></span>Cerrar Sesión</a
+        >
+      </li>
+      <li *ngIf="!identity">
+        <a class="pointer" [routerLink]="['/login']"
+          ><span class="icon flaticon-right-arrow"></span>Iniciar Sesión</a
+        >
+      </li>
+      <li *ngIf="!identity">
+        <a class="pointer" [routerLink]="['/registro']"
+          ><span class="icon flaticon-right-arrow"></span>Registrarse</a
+        >
+      </li>
+      <li>
+        <a class="pointer"
+          ><span class="icon flaticon-right-arrow"></span>Ayuda</a
+        >
+      </li>
+      <li>
+        <a class="pointer"
+          ><span class="icon flaticon-right-arrow"></span>Contacto</a
+        >
+      </li>
+    </ul>
+  </div>
+  <!--Copyright Text-->
+  <div class="copyright-text">Copyright &copy; 2020 Comuna</div>
+</section>
+<div class="scroll-to-top scroll-to-target" data-target="html">
+  <span class="fa fa-arrow-circle-up"></span>
+</div>

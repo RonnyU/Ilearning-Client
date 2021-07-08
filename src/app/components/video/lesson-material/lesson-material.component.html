@@ -1,0 +1,96 @@
+<div class="container-fluid">
+  <hr />
+
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <div class="row card">
+        <h4>Descargas</h4>
+
+        <div
+          class="row"
+          *ngFor="let item of suppMaterial; let i = index"
+          style="
+            margin: 10px;
+            padding: 5px;
+            background-color: rgb(231, 229, 229);
+            border-radius: 5px;
+            line-height: 40px;
+          "
+        >
+          <i
+            *ngIf="item.supportMaterialDesc == 'application/pdf'"
+            class="fa fa-file-pdf text-danger"
+          ></i>
+          <i
+            *ngIf="
+              item.supportMaterialDesc == 'application/x-tar' ||
+              item.supportMaterialDesc == 'application/octet-stream' ||
+              item.supportMaterialDesc == 'application/x-7z-compressed' ||
+              item.supportMaterialDesc == 'application/zip' ||
+              item.supportMaterialDesc == 'application/x-zip-compressed' ||
+              item.supportMaterialDesc == 'application/x-rar-compressed'
+            "
+            class="fa fa-file-archive text-secondary"
+          ></i>
+          <i
+            *ngIf="
+              item.supportMaterialDesc ==
+                'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ||
+              item.supportMaterialDesc == 'application/msword'
+            "
+            class="fas fa-file-word text-primary"
+          ></i>
+          <i
+            *ngIf="
+              item.supportMaterialDesc ==
+                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' ||
+              item.supportMaterialDesc == 'application/vnd.ms-excel'
+            "
+            class="fas fa-file-excel text-success"
+          ></i>
+          <i
+            *ngIf="
+              item.supportMaterialDesc ==
+                'application/vnd.openxmlformats-officedocument.presentationml.presentation' ||
+              item.supportMaterialDesc == 'application/vnd.ms-powerpoint'
+            "
+            class="fas fa-file-powerpoint text-powerpoint"
+            style="font-size: 20px"
+          ></i>
+          <i
+            *ngIf="
+              item.supportMaterialDesc == 'image/png' ||
+              item.supportMaterialDesc == 'image/jpg' ||
+              item.supportMaterialDesc == 'image/jpeg' ||
+              item.supportMaterialDesc == 'image/gif'
+            "
+            class="fas fa-file-image text-info"
+          ></i>
+          <i
+            *ngIf="
+              item.supportMaterialDesc == 'audio/mp3' ||
+              item.supportMaterialDesc == 'audio/mp4' ||
+              item.supportMaterialDesc == 'audio/aac' ||
+              item.supportMaterialDesc == 'audio/mpeg' ||
+              item.supportMaterialDesc == 'audio/mp4'
+            "
+            class="fas fa-file-audio text-danger"
+          ></i>
+          <i
+            *ngIf="item.supportMaterialDesc == 'text/plain'"
+            class="fas fa-file-alt text-secondary"
+          ></i>
+
+          <div class="col-sm-7">{{ item.title }}</div>
+          <div class="col-sm-5" style="text-align: center">
+            <button type="button" class="btn btn-primary" (click)="download(i)">
+              descargar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+</div>

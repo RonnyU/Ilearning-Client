@@ -1,0 +1,14 @@
+<div class="container-fluid px-0">
+  <div
+    *ngIf="change"
+    plyr
+    style="width: 100%"
+    plyrTitle="Video 1"
+    plyrPoster="poster"
+    [plyrPlaysInline]="true"
+    [plyrSources]="videoSources"
+    (plyrInit)="player = $event"
+    (plyrPlay)="played($event)"
+    (plyrProgress)="getProgress = $event"
+  ></div>
+</div>

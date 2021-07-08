@@ -1,0 +1,154 @@
+<!-- Instructor Page Section -->
+<div class="instructor-page-section pt-0 pb-0">
+  <div class="auto-container px-0">
+    <div class="upper-content px-lg-0 py-0">
+      <div class="row btn-comuna p-3">
+        <h5 class="mb-0">{{ title }}</h5>
+      </div>
+      <div class="row clearfix">
+        <!-- Left Column -->
+        <div class="left-column col-lg-9 col-md-9 col-12 px-0">
+          <!-- Content -->
+          <app-video-player [videoDesc]="videoFileName"> </app-video-player>
+          <!-- Lower Content -->
+          <div class="lower-content">
+            <!-- Instructor Info Tabs-->
+            <div class="instructor-info-tabs">
+              <!-- Instructor Tabs-->
+              <div class="instructor-tabs tabs-box">
+                <!-- Tab Btns -->
+                <ul class="tab-btns tab-buttons clearfix">
+                  <li data-tab="#prod-desc" class="active-btn tab-btn">
+                    Descripción
+                  </li>
+                  <li data-tab="#prod-questions" class="tab-btn">
+                    Preguntas y Respuestas
+                  </li>
+                  <li data-tab="#prod-material" class="tab-btn">
+                    Material de apoyo
+                  </li>
+                </ul>
+
+                <!-- Tabs Container -->
+                <!-- Tabs Container -->
+                <div class="tabs-content">
+                  <!-- Tab / Active Tab -->
+                  <div class="tab active-tab" id="prod-desc">
+                    <div class="content pl-0">
+                      <h6>Descripción de la lección</h6>
+                      <div class="text">
+                        <span
+                          *ngIf="course"
+                          [innerHTML]="course.courseDesc"
+                        ></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tab" id="prod-material">
+                    <app-lesson-material [SM]="sM"></app-lesson-material>
+                  </div>
+                  <div class="tab" id="prod-questions">
+                    <app-questions-answer
+                      [comments]="comments"
+                      [videoId]="videoId"
+                    >
+                    </app-questions-answer>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Right Column -->
+        <div class="right-column col-lg-3 col-md-3 col-12 px-0 fixed-height">
+          <div
+            class="fixed-height"
+            style="max-height: 120vh; min-height: 120vh; overflow-y: auto"
+          >
+            <ngb-accordion #acc="ngbAccordion" activeIds="static-0">
+              <ngb-panel
+                *ngFor="
+                  let chapter of _courseService.courseForEdit;
+                  let i = index
+                "
+                id="{{ 'static-' + i }}"
+              >
+                <ng-template ngbPanelTitle>
+                  <span
+                    ><b>Capítulo {{ i + 1 }}. </b>
+                    {{ chapter.chapterName }}</span
+                  >
+                </ng-template>
+                <ng-template ngbPanelContent>
+                  <div
+                    *ngFor="
+                      let lesson of chapter.lesson | sort: 'position';
+                      let j = index
+                    "
+                  >
+                    <div
+                      *ngIf="lesson.video"
+                      class="row px-2 py-3 pointer"
+                      (click)="
+                        LoadVideo(
+                          lesson.video.videoDesc,
+                          lesson.video.comments,
+                          lesson.video._id,
+                          lesson.video.supportMaterial
+                        )
+                      "
+                      [ngClass]="
+                        lesson.video.videoDesc == videoFileName
+                          ? 'bg-light'
+                          : ''
+                      "
+                    >
+                      <div class="col-9 px-0" *ngIf="lesson.video">
+                        <i
+                          class="fas fa-play mr-2 mt-2"
+                          style="color: #0d58a8; font-size: 10px"
+                        ></i>
+                        <span class="badge badge-light"></span>
+                        <strong class="text">Lección {{ j + 1 }} </strong
+                        ><span class="ml-1 text">
+                          - {{ lesson.lessonName }}</span
+                        >
+                      </div>
+                      <div class="col-3 px-0 text" *ngIf="lesson.video">
+                        <span class="badge badge-light float-right p-1"
+                          ><i
+                            class="far fa-clock text-black-50 ml-2"
+                            style="font-size: 12px"
+                          ></i>
+                          <span class="text-black-50">
+                            {{
+                              lesson.video.videoDuration * 1000
+                                | date: "H:mm:ss":"UTC"
+                            }}</span
+                          >
+                        </span>
+                      </div>
+                      <div *ngIf="lesson.video">
+                        <div
+                          class="col-12"
+                          *ngIf="videoFileName == lesson.video.videoDesc"
+                        >
+                          <span class="badge badge-warning"
+                            ><i class="fas fa-play-circle"></i>
+                            Reproduciendo</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-panel>
+            </ngb-accordion>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- End Instructor Page Section -->

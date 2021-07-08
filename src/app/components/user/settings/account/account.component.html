@@ -1,0 +1,322 @@
+<!-- Setting Section -->
+<div class="setting-section">
+  <div class="auto-container">
+    <!-- Sec Title -->
+    <div class="sec-title">
+      <h4>Configuracón</h4>
+    </div>
+    <div class="inner-container">
+      <!-- Setting Info Tabs-->
+      <div class="setting-info-tabs">
+        <!-- Setting Tabs-->
+        <div class="setting-tabs tabs-box">
+          <!-- Tab Btns -->
+          <ul class="tab-btns tab-buttons clearfix">
+            <li
+              class="active-btn tab-btn"
+              [routerLink]="['/configuracion/cuenta']"
+            >
+              Cuenta
+            </li>
+            <li class="tab-btn">Notificación</li>
+            <li class="tab-btn">Pagos</li>
+            <li class="tab-btn" [routerLink]="['/configuracion/privacidad']">
+              Privacidad
+            </li>
+            <li class="tab-btn" [routerLink]="['/configuracion/cerrar-cuenta']">
+              Cerrar Cuenta
+            </li>
+          </ul>
+
+          <!-- Tabs Container -->
+          <div class="tabs-content">
+            <!-- Tab / Active Tab -->
+            <h6>Cuenta</h6>
+            <div class="text">
+              La informacion puesta aqui se mostrara en tu perfil de estudiante
+              o perfill profesional respectivamente, puedes decidir que campos
+              ocultar despues en el apartado de privacidad
+            </div>
+            <div class="content">
+              <h6>Informacion basica</h6>
+              <div class="text">Agrega informacion acerca de ti</div>
+
+              <!-- Setting Form -->
+              <div class="setting-form">
+                <!-- Setting Form -->
+                <form
+                  method="post"
+                  #accountForm="ngForm"
+                  (ngSubmit)="onSubmit(accountForm)"
+                >
+                  <div class="row clearfix">
+                    <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                      <input
+                        type="text"
+                        name="username"
+                        placeholder="Nombre*"
+                        #name="ngModel"
+                        [(ngModel)]="user.name"
+                        [required]
+                        pattern="[a-zA-ZÀ-ÿ ]+"
+                      />
+                      <small
+                        *ngIf="!name.valid && name.touched"
+                        class="invalid-feedback d-block"
+                      >
+                        El nombre no es válido
+                      </small>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                      <input
+                        type="text"
+                        name="surname"
+                        placeholder="Apellidos*"
+                        #surname="ngModel"
+                        [(ngModel)]="user.surname"
+                        required
+                        pattern="[a-zA-ZÀ-ÿ ]+"
+                      />
+                      <small
+                        *ngIf="!surname.valid && surname.touched"
+                        class="invalid-feedback d-block"
+                      >
+                        Los apellidos no son válidos
+                      </small>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                      <input
+                        type="email"
+                        name="email"
+                        placeholder="Correo electronico*"
+                        #email="ngModel"
+                        [(ngModel)]="user.email"
+                        required
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                      />
+                      <small
+                        *ngIf="!email.valid && email.touched"
+                        class="invalid-feedback d-block"
+                      >
+                        El email no es válido
+                      </small>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="gender"
+                          id="femenino"
+                          value="femenino"
+                          [(ngModel)]="user.gender"
+                        />
+                        <label class="form-check-label" for="femenino"
+                          >Femenino</label
+                        >
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="gender"
+                          id="masculino"
+                          value="masculino"
+                          [(ngModel)]="user.gender"
+                        />
+                        <label class="form-check-label" for="masculino"
+                          >Masculino</label
+                        >
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="gender"
+                          id="otro"
+                          value="otro"
+                          [(ngModel)]="user.gender"
+                        />
+                        <label class="form-check-label" for="otro">otro </label>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                      <input
+                        type="text"
+                        name="phone"
+                        placeholder="Telefono*"
+                        #phone="ngModel"
+                        [(ngModel)]="user.phone"
+                      />
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                      <input
+                        type="text"
+                        name="location"
+                        placeholder="Direccion de residencia*"
+                        #location="ngModel"
+                        [(ngModel)]="user.location"
+                      />
+                    </div>
+
+                    <div class="text">Agrega un titulo profesional</div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                      <input
+                        type="text"
+                        name="username"
+                        placeholder="Soy un diseñador UI/UX"
+                        [(ngModel)]="user.profesion"
+                      />
+                    </div>
+
+                    <div class="text">
+                      Agrega una descripcion personal o profesional
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 mb-5">
+                      <textarea
+                        [froalaEditor]="options"
+                        name="description"
+                        class="form-control"
+                        #description="ngModel"
+                        [(ngModel)]="user.userDesc"
+                        [(froalaModel)]="user.userDesc"
+                      ></textarea>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-12 form-group"></div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 form-group">
+                      <div *ngIf="identity && identity.imagePath">
+                        <img
+                          src="{{ url + 'user/avatar/' + identity.imagePath }}"
+                          class="avatar_edit"
+                          alt="Imagen del avatar"
+                        />
+                      </div>
+
+                      <angular-file-uploader
+                        [config]="afuConfig"
+                        [resetUpload]="resetVar"
+                        (ApiResponse)="avatarUpload($event)"
+                      >
+                      </angular-file-uploader>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 form-group"></div>
+
+                    <div
+                      class="
+                        col-lg-12 col-md-12 col-sm-12
+                        form-group
+                        site-input
+                      "
+                    >
+                      <h6>Profile Links</h6>
+                      <div class="link-name">
+                        <span class="icon fa fa-globe"></span> https://
+                      </div>
+                      <input
+                        type="text"
+                        name="username"
+                        placeholder="yourcompany.mysite.net"
+                        required
+                        disabled
+                      />
+                    </div>
+
+                    <div
+                      class="col-lg-12 col-md-12 col-sm-12 form-group youtube"
+                    >
+                      <div class="link-name">
+                        <span class="icon fa fa-youtube-play"></span>
+                        https://www.youtube.com/
+                      </div>
+                      <input
+                        type="text"
+                        name="username"
+                        placeholder="Youtube Profile"
+                        required
+                        disabled
+                      />
+                    </div>
+
+                    <div
+                      class="col-lg-12 col-md-12 col-sm-12 form-group linkedin"
+                    >
+                      <div class="link-name">
+                        <span class="icon fa fa-linkedin"></span>
+                        https://www.linkedin.com/
+                      </div>
+                      <input
+                        type="text"
+                        name="username"
+                        placeholder="LinkedIn Profile"
+                        required
+                        disabled
+                      />
+                    </div>
+
+                    <div
+                      class="col-lg-12 col-md-12 col-sm-12 form-group twitter"
+                    >
+                      <div class="link-name">
+                        <span class="icon fa fa-twitter-square"></span>
+                        https://www.twitter.com/
+                      </div>
+                      <input
+                        type="text"
+                        name="username"
+                        placeholder="Twitter Profile"
+                        required
+                        disabled
+                      />
+                    </div>
+
+                    <div
+                      class="col-lg-12 col-md-12 col-sm-12 form-group facebook"
+                    >
+                      <div class="link-name">
+                        <span class="icon fa fa-twitter-square"></span>
+                        https://www.facebook.com/
+                      </div>
+                      <input
+                        type="text"
+                        name="username"
+                        placeholder="Facebook Profile"
+                        required
+                        disabled
+                      />
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                      <button
+                        class="theme-btn btn-style-one"
+                        type="submit"
+                        name="submit-form"
+                        [disabled]="accountForm.invalid"
+                      >
+                        <span class="txt">Guardar Cambios</span>
+                      </button>
+                      <button
+                        class="theme-btn btn-style-two"
+                        type="submit"
+                        name="submit-form"
+                      >
+                        <span class="txt">Cancelar</span>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!--End Comment Form -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Setting Section -->

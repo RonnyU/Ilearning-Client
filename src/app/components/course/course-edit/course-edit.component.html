@@ -1,0 +1,636 @@
+<!-- Confirm deletion modal -->
+<ng-template #addVideo let-modal style="z-index: 600000">
+  <div class="modal-header">
+    <h4 class="modal-title">Selecciona un video</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <angular-file-uploader
+      [config]="afuConfig"
+      [resetUpload]="resetVar"
+      (ApiResponse)="avatarUpload($event)"
+    >
+    </angular-file-uploader>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close(false)">
+      Cancelar
+    </button>
+  </div>
+</ng-template>
+<!-- End of confirmation modal -->
+<!-- Confirm deletion modal -->
+<ng-template #addResources let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Selecciona hasta 5 archivos</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <angular-file-uploader
+      [config]="afuConfig2"
+      [resetUpload]="resetVar"
+      (ApiResponse)="uploadFiles($event)"
+    >
+    </angular-file-uploader>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close(false)">
+      Cancelar
+    </button>
+  </div>
+</ng-template>
+<!-- End of confirmation modal -->
+<!-- Confirm deletion modal -->
+<ng-template #content let-modal style="z-index: 600000">
+  <div class="modal-header">
+    <h4 class="modal-title">Confirmar borrado</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <span>¿Estás seguro de querer eliminar este elemento?</span>
+    <p></p>
+    <small>Esta acción no se puede reversar.</small>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close(false)">
+      Cancelar
+    </button>
+    <button type="button" class="btn btn-danger" (click)="modal.close(true)">
+      Confirmar
+    </button>
+  </div>
+</ng-template>
+<ng-template #edit let-modal style="z-index: 600000">
+  <div class="modal-header">
+    <h4 class="modal-title">Actualizar capítulo</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss(false)"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-12 mb-3">
+        Título
+        <input
+          type="text"
+          name="chpaterName"
+          class="form-control"
+          [(ngModel)]="toUpdate.title"
+        />
+      </div>
+      <div class="col-12">
+        descripción
+        <textarea
+          type="text"
+          name="chapterDesc"
+          class="form-control"
+          [(ngModel)]="toUpdate.desc"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-comuna btn-block"
+      (click)="modal.close(true)"
+    >
+      Guardar cambios
+    </button>
+  </div>
+</ng-template>
+<ng-template #editLesson let-modal style="z-index: 600000">
+  <div class="modal-header">
+    <h4 class="modal-title">Actualizar lección</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss(false)"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-12 mb-3">
+        Título
+        <input
+          type="text"
+          name="chpaterName"
+          class="form-control"
+          [(ngModel)]="toUpdate.title"
+        />
+      </div>
+      <div class="col-12">
+        descripción
+        <textarea
+          type="text"
+          name="chapterDesc"
+          class="form-control"
+          [(ngModel)]="toUpdate.desc"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-comuna btn-block"
+      (click)="modal.close(true)"
+    >
+      Guardar cambios
+    </button>
+  </div>
+</ng-template>
+<!-- End of confirmation modal -->
+<div class="container">
+  <div class="sidebar-page-container">
+    <div class="auto-container">
+      <div class="row clearfix">
+        <!-- Content Side -->
+        <div class="content-side col-lg-12 col-md-12 col-sm-12">
+          <!-- Sec Title -->
+          <div class="sec-title centered">
+            <h2 class="mb-5 display-4">Centro de edición de curso</h2>
+            <h4 class="py-3 ml-3" style="text-align-last: left !important">
+              <strong>{{ title }}</strong>
+            </h4>
+            <div class="container-fluid">
+              <form
+                #addChapter="ngForm"
+                (ngSubmit)="addNewChapter(addChapter)"
+                method="POST"
+              >
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-4 my-2 col-md-4 col-12">
+                      <input
+                        type="text"
+                        class="form-control col-12"
+                        name="chapterName"
+                        placeholder="Nombre del capítulo"
+                        [(ngModel)]="chapterData.chapterName"
+                      />
+                    </div>
+                    <div class="col-6 my-2 col-md-6 col-12">
+                      <input
+                        type="text"
+                        name="chapterDesc"
+                        class="form-control col-12"
+                        placeholder="Breve descripción del capítulo"
+                        [(ngModel)]="chapterData.chapterDesc"
+                      />
+                    </div>
+                    <div class="col-2 my-2 col-md-2 col-12">
+                      <button
+                        type="submit"
+                        name="chapterDesc"
+                        class="btn btn-outline-secondary py-1"
+                      >
+                        Crear capítulo
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="row align-items-center">
+            <div class="div.col-md-6 col-lg-6 col-12">
+              <button
+                class="btn btn-link text-info mb-3"
+                (click)="contraerTodo()"
+              >
+                Contraer / desplegar todo
+              </button>
+            </div>
+            <div class="div.col-md-6 col-lg-6 col-12">
+              <div class="container-fluid">
+                <input
+                  type="checkbox"
+                  id="settings"
+                  class="switch_1 float-right"
+                  [checked]="autoZoom"
+                  (change)="changeSettings()"
+                />
+                <span
+                  class="mb-3 mr-3 float-right"
+                  placement="top"
+                  ngbTooltip="Activar o desactivar el auto-zoom a la hora de arrastrar los capítulos."
+                  >Activar auto-zoom</span
+                >
+              </div>
+            </div>
+          </div>
+          <!-- Certificate Box -->
+          <div
+            cdkDropList
+            (cdkDropListDropped)="onChapterDropped($event)"
+            class="sss"
+            style="transition: all 0.1s ease-in-out"
+          >
+            <div
+              cdkDrag
+              (cdkDragStarted)="onStartDragging($event)"
+              (cdkDragEnded)="onStopDragging($event)"
+              class="certificate-box cdk-drag-animating"
+              *ngFor="
+                let chapter of _courseService.courseForEdit;
+                let i = index
+              "
+              style="list-style: none"
+            >
+              <div
+                cdkDropList
+                (cdkDropListDropped)="onDropped($event, i, chapter._id)"
+                class="box-inner cdk-chapter{{ i }}"
+                style="text-align-last: left !important"
+                slot="{{ chapter._id }}"
+              >
+                <h6 class="mr-auto mb-3 move" (click)="showContent($event)">
+                  Capítulo {{ i + 1 }}. {{ chapter.chapterName }}
+                  <span
+                    *ngIf="chapter.lesson.length > 0"
+                    class="badge badge-info float-right ml-3"
+                    >{{ chapter.lesson.length }}</span
+                  >
+                  <span
+                    *ngIf="chapter.lesson.length == 0"
+                    class="badge badge-secondary float-right ml-3"
+                    >{{ chapter.lesson.length }}</span
+                  >
+
+                  <i
+                    class="fa fa-trash pointer text-secondary float-right hide"
+                    (click)="deleteChapter(chapter._id, content)"
+                    data-toggle="tooltip"
+                    placement="top"
+                    ngbTooltip="Eliminar capítulo"
+                    id="delete-chapter"
+                  ></i>
+                  <i
+                    class="fas fa-pen pointer text-secondary float-right mr-3 hide"
+                    (click)="updateChapter(chapter._id, edit, 'contenedor' + i)"
+                    data-toggle="tooltip"
+                    placement="top"
+                    ngbTooltip="cambiar valores"
+                    id="edit-chapter"
+                  ></i>
+                </h6>
+
+                <div class="chapter-container container-fluid">
+                  <form
+                    method="POST"
+                    #addLesson="ngForm"
+                    (ngSubmit)="
+                      addNewLesson(chapter._id, addLesson, chapter.position, i)
+                    "
+                  >
+                    <div class="form-group col-10 mx-auto">
+                      <div class="row">
+                        <div class="col-md-3 col-lg-3 col-12 my-2">
+                          <input
+                            type="text"
+                            class="form-control col-12"
+                            name="lessonName"
+                            placeholder="Nombre de la lección"
+                            ngModel
+                          />
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-12 my-2">
+                          <input
+                            type="text"
+                            name="lessonDesc"
+                            class="form-control col-12"
+                            placeholder="Breve descripción"
+                            ngModel
+                          />
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-12 my-2">
+                          <button
+                            type="submit"
+                            class="btn btn-outline-info py-1 col-12"
+                          >
+                            Crear lección
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <div
+                    cdkDrag
+                    class="container cont-lesson shadow-sm py-2 mb-3 cdk-drag-animating"
+                    style="
+                      border-radius: 8px;
+                      background-color: rgb(250, 250, 250);
+                    "
+                    *ngFor="
+                      let lesson of chapter.lesson | sort: 'position';
+                      let j = index
+                    "
+                  >
+                    <div class="move">
+                      <p style="font-size: 18px">
+                        <i class="fa fa-arrow-circle-right mr-3"></i>
+                        <span class="font-weight-bold"
+                          >Lección {{ j + 1 }}.
+                        </span>
+                        <i class="fa fa-play-circle text-info mx-2"></i
+                        >{{ lesson.lessonName }}
+                        <i
+                          class="fa fa-trash pointer text-secondary float-right hide"
+                          placement="top"
+                          ngbTooltip="Eliminar lección"
+                          id="delete-lesson"
+                          (click)="
+                            deleteLesson(chapter._id, lesson._id, content)
+                          "
+                        ></i>
+                        <i
+                          class="fas fa-pen pointer text-secondary float-right hide mr-3"
+                          placement="top"
+                          ngbTooltip="Cambiar valores"
+                          id="edit-lesson"
+                          (click)="
+                            updateLesson(chapter._id, lesson._id, editLesson, i)
+                          "
+                        ></i>
+                      </p>
+                    </div>
+
+                    <ngb-accordion [closeOthers]="true">
+                      <ngb-panel
+                        placement="right"
+                        ngbTooltip="{{ lesson.lessonName }}"
+                        id="static-1"
+                      >
+                        <ng-template ngbPanelTitle>
+                          Video de la lección
+                          <i
+                            *ngIf="lesson.video"
+                            class="fa fa-check ml-2 text-success"
+                          ></i>
+                        </ng-template>
+                        <ng-template ngbPanelContent>
+                          <div class="row">
+                            <div class="col-12">
+                              <div class="row">
+                                <div class="col-md-2 col-lg-2 col-12 py-3">
+                                  <span class="float-right">
+                                    <video
+                                      src="{{
+                                        url +
+                                          'video/getVideo/' +
+                                          lesson.video.videoDesc
+                                      }}"
+                                      width="100px"
+                                      height="75px"
+                                      *ngIf="lesson.video"
+                                      id="video"
+                                    ></video>
+                                    <img
+                                      *ngIf="!lesson.video"
+                                      src="https://www.flaticon.com/svg/static/icons/svg/3658/3658983.svg"
+                                      alt=""
+                                      height="24px"
+                                      width="55px"
+                                    />
+                                  </span>
+                                </div>
+                                <div class="col-md-5 col-lg-5 col-12">
+                                  <p *ngIf="lesson.video" class="mb-0">
+                                    {{ lesson.video.videoDesc }}
+                                  </p>
+                                </div>
+                                <div class="col-md-5 col-lg-5 col-12">
+                                  <p
+                                    class="text-danger pointer"
+                                    *ngIf="lesson.video"
+                                    (click)="
+                                      deleteVideo(
+                                        lesson.video._id,
+                                        content,
+                                        chapter._id,
+                                        lesson._id
+                                      )
+                                    "
+                                  >
+                                    Eliminar video
+                                  </p>
+                                  <p
+                                    (click)="
+                                      loadPosition(
+                                        chapter._id,
+                                        lesson._id,
+                                        addVideo
+                                      )
+                                    "
+                                    class="text-info pointer"
+                                    *ngIf="!lesson.video"
+                                  >
+                                    Agregar video
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </ng-template>
+                      </ngb-panel>
+                      <ngb-panel id="static-2">
+                        <ng-template ngbPanelTitle>
+                          Material de apoyo al estudiante
+                          <span *ngIf="lesson.video">
+                            <strong
+                              >({{
+                                lesson.video.supportMaterial.length
+                              }}
+                              ficheros)</strong
+                            >
+                          </span>
+                        </ng-template>
+                        <ng-template ngbPanelContent>
+                          <div class="row">
+                            <div class="col-md-8 col-lg-8 col-12 py-3">
+                              <ul
+                                class="mb-2"
+                                style="max-height: 250px; overflow-y: auto"
+                                *ngIf="lesson.video"
+                              >
+                                <li class="d-block">
+                                  <i class="fa fa-folder-open text-warning"></i>
+                                  Archivos
+                                  <ul class="mb-2">
+                                    <li
+                                      *ngFor="
+                                        let sp of lesson.video.supportMaterial;
+                                        let k = index
+                                      "
+                                      class="d-block mb-1"
+                                    >
+                                      <div class="row" id="rrr">
+                                        <div class="col-10">
+                                          <i
+                                            *ngIf="
+                                              sp.supportMaterialDesc ==
+                                              'application/pdf'
+                                            "
+                                            class="fa fa-file-pdf text-danger"
+                                          ></i>
+                                          <i
+                                            *ngIf="
+                                              sp.supportMaterialDesc ==
+                                                'application/x-tar' ||
+                                              sp.supportMaterialDesc ==
+                                                'application/octet-stream' ||
+                                              sp.supportMaterialDesc ==
+                                                'application/x-7z-compressed' ||
+                                              sp.supportMaterialDesc ==
+                                                'application/zip' ||
+                                              sp.supportMaterialDesc ==
+                                                'application/x-zip-compressed' ||
+                                              sp.supportMaterialDesc ==
+                                                'application/x-rar-compressed'
+                                            "
+                                            class="fa fa-file-archive text-secondary"
+                                          ></i>
+                                          <i
+                                            *ngIf="
+                                              sp.supportMaterialDesc ==
+                                                'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ||
+                                              sp.supportMaterialDesc ==
+                                                'application/msword'
+                                            "
+                                            class="fas fa-file-word text-primary"
+                                          ></i>
+                                          <i
+                                            *ngIf="
+                                              sp.supportMaterialDesc ==
+                                                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' ||
+                                              sp.supportMaterialDesc ==
+                                                'application/vnd.ms-excel'
+                                            "
+                                            class="fas fa-file-excel text-success"
+                                          ></i>
+                                          <i
+                                            *ngIf="
+                                              sp.supportMaterialDesc ==
+                                                'application/vnd.openxmlformats-officedocument.presentationml.presentation' ||
+                                              sp.supportMaterialDesc ==
+                                                'application/vnd.ms-powerpoint'
+                                            "
+                                            class="fas fa-file-powerpoint text-powerpoint"
+                                          ></i>
+                                          <i
+                                            *ngIf="
+                                              sp.supportMaterialDesc ==
+                                                'image/png' ||
+                                              sp.supportMaterialDesc ==
+                                                'image/jpg' ||
+                                              sp.supportMaterialDesc ==
+                                                'image/jpeg' ||
+                                              sp.supportMaterialDesc ==
+                                                'image/gif'
+                                            "
+                                            class="fas fa-file-image text-info"
+                                          ></i>
+                                          <i
+                                            *ngIf="
+                                              sp.supportMaterialDesc ==
+                                                'audio/mp3' ||
+                                              sp.supportMaterialDesc ==
+                                                'audio/mp4' ||
+                                              sp.supportMaterialDesc ==
+                                                'audio/aac' ||
+                                              sp.supportMaterialDesc ==
+                                                'audio/mpeg' ||
+                                              sp.supportMaterialDesc ==
+                                                'audio/mp4'
+                                            "
+                                            class="fas fa-file-audio text-danger"
+                                          ></i>
+                                          <i
+                                            *ngIf="
+                                              sp.supportMaterialDesc ==
+                                              'text/plain'
+                                            "
+                                            class="fas fa-file-alt text-secondary"
+                                          ></i>
+                                          <span> {{ sp.title }}</span>
+                                        </div>
+                                        <div class="col-2">
+                                          <i
+                                            id="delete-file"
+                                            class="fas fa-times text-danger hide pointer float-right"
+                                            (click)="
+                                              deleteSupportMaterial(
+                                                lesson.video._id,
+                                                sp._id,
+                                                content
+                                              )
+                                            "
+                                          ></i>
+                                        </div>
+                                      </div>
+                                    </li>
+                                  </ul>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="col-md-4 col-lg-4 col-12 py-3">
+                              <button
+                                *ngIf="lesson.video"
+                                class="btn btn-outline-secondary btn-sm"
+                                (click)="
+                                  addSupportMaterial(
+                                    lesson.video._id,
+                                    addResources
+                                  )
+                                "
+                              >
+                                Agregar recursos
+                              </button>
+                            </div>
+                          </div>
+                        </ng-template>
+                      </ngb-panel>
+                    </ngb-accordion>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar Side -->
+      </div>
+    </div>
+  </div>
+</div>

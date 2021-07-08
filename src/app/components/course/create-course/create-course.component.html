@@ -1,0 +1,411 @@
+<ng-template #editCourseModal let-modal style="z-index: 600000">
+  <form #editCourseForm="ngForm">
+    <div class="modal-header">
+      <h4 class="modal-title">Editar valores del curso</h4>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="modal.close(false)"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-6">
+          <label for="inputEmail4" class="form-label">Titulo del curso</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="toUpdate.title"
+            name="title"
+            id="inputEmail4"
+          />
+        </div>
+        <div class="col-md-6">
+          <label for="inputPassword4" class="form-label">Precio</label>
+          <input
+            type="text"
+            class="form-control"
+            name="coursePrice"
+            id="inputPassword4"
+            [(ngModel)]="toUpdate.coursePrice"
+          />
+        </div>
+        <div class="col-12">
+          <label for="inputAddress" class="form-label">Descripción</label>
+          <textarea
+            [froalaEditor]="options"
+            name="courseDesc"
+            [(ngModel)]="toUpdate.courseDesc"
+            [(froalaModel)]="toUpdate.courseDesc"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close(false)">
+        Cancelar
+      </button>
+      <button
+        type="submit"
+        class="btn btn-comuna"
+        (click)="commitEditCourse(editCourseForm)"
+      >
+        Confirmar cambios
+      </button>
+    </div>
+  </form>
+</ng-template>
+<!-- Modal to confirm detetion -->
+<ng-template #content let-modal style="z-index: 600000">
+  <div class="modal-header">
+    <h4 class="modal-title">Confirmar borrado</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <span>¿Estás seguro de querer eliminar este elemento?</span>
+    <p></p>
+    <small>Esta acción no se puede reversar.</small>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close(false)">
+      Cancelar
+    </button>
+    <button type="button" class="btn btn-danger" (click)="modal.close(true)">
+      Confirmar
+    </button>
+  </div>
+</ng-template>
+<!-- End of modals -->
+<form method="post" #addCourse="ngForm" (ngSubmit)="onSubmit(addCourse)">
+  <div class="edit-cource-section">
+    <div class="auto-container">
+      <!-- Sec Title -->
+      <div class="sec-title">
+        <div class="clearfix">
+          <div class="pull-left">
+            <h4>Crear un nuevo curso</h4>
+          </div>
+        </div>
+      </div>
+      <div class="inner-container">
+        <div class="row clearfix">
+          <!-- Left Column -->
+          <div class="left-column col-lg-8 col-md-12 col-sm-12">
+            <div class="inner-column">
+              <h6>Basic Information</h6>
+
+              <!-- Edit Course Form -->
+
+              <div class="edit-course-form">
+                <!-- Form Group -->
+                <div class="form-group">
+                  <label>Titulo del curso</label>
+                  <input
+                    type="text"
+                    name="title"
+                    class=""
+                    value=""
+                    placeholder="Ingrese el nombre del curso a crear"
+                    required
+                    ngModel
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Descripcion de curso</label>
+                  <textarea
+                    [froalaEditor]="options"
+                    name="courseDesc"
+                    ngModel
+                  ></textarea>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label>Selecciona una imagen de portada</label>
+                      <ngx-dropzone
+                        class="custom-dropzone"
+                        (change)="onSelect($event)"
+                        [accept]="'image/*'"
+                        [multiple]="false"
+                      >
+                        <ngx-dropzone-label>
+                          <span class="display-3">
+                            <i class="fas fa-cloud-download-alt"></i>
+                          </span>
+
+                          <p>
+                            Suelta una imagen aquí. O haz click para seleccionar
+                            una.
+                          </p></ngx-dropzone-label
+                        >
+                        <ngx-dropzone-image-preview
+                          ngProjectAs="ngx-dropzone-preview"
+                          *ngFor="let f of files"
+                          [file]="f"
+                          [removable]="true"
+                          (removed)="onRemove(f)"
+                        >
+                          <ngx-dropzone-label>{{ f.name }}</ngx-dropzone-label>
+                        </ngx-dropzone-image-preview>
+                      </ngx-dropzone>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column -->
+          <div class="right-column col-lg-4 col-md-12 col-sm-12">
+            <div class="inner-column">
+              <h6 class="mb-2">Video de introducción</h6>
+              <small class="text-black-50 w-50 mb-2"
+                >Puedes agregar un video de introducción para mostrar a tus
+                posibles estudiantes lo que aprenderán con tu curso. Esto es
+                opcional, pero te recomendamos agregarlo ;)</small
+              >
+
+              <!-- Video Box -->
+              <div
+                class="video-boxed mt-2"
+                style="
+                  background-image: url(https://noticiasdaily.com/wp-content/uploads/2020/04/video-marketing.jpg);
+                  background-position: center;
+                "
+              >
+                <a
+                  [routerLink]="['/curso/nuevo']"
+                  class="lightbox-image intro-video-box"
+                  ><span class="fa fa-play"><i class="ripple"></i></span>
+                </a>
+              </div>
+              <!-- End Video Box -->
+
+              <!-- Url Box -->
+              <div class="url-boxed">
+                <label>Selecciona un video</label>
+                <div class="custom-file">
+                  <input
+                    type="file"
+                    class="custom-file-input hide"
+                    accept="video/*"
+                    id="validatedCustomFile"
+                    (change)="videoSelected($event.target.files)"
+                  />
+                  <label
+                    class="custom-file-label mb-3"
+                    for="validatedCustomFile"
+                    >Elegir un video</label
+                  >
+                </div>
+                <span
+                  class="text-danger pointer"
+                  id="eliminar-video-promo"
+                  style="display: none"
+                  (click)="removeVideoFile()"
+                  >Eliminar video <i class="fas fa-times ml-2"></i>
+                </span>
+              </div>
+
+              <h6>Opciones</h6>
+              <!-- End Video Box -->
+
+              <!-- Url Box -->
+              <div class="url-boxed">
+                <div class="row">
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label>Precio del curso</label>
+                      <input
+                        type="number"
+                        class="col-12"
+                        name="coursePrice"
+                        ngModel
+                      />
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label>Indique la categoria</label>
+                      <select
+                        id="category"
+                        class="col-12 custom-select"
+                        name="category"
+                        ngModel
+                        (change)="listSubcategories()"
+                      >
+                        <option
+                          *ngFor="
+                            let category of _categoryService.categoryData;
+                            let i = index
+                          "
+                          value="{{ category._id }}"
+                        >
+                          {{ category.categoryName }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="container">
+                  <ul class="ks-cboxtags">
+                    <li
+                      class="ml-2"
+                      *ngFor="
+                        let subcategory of _subcategoryService.subcategoryData;
+                        let i = index
+                      "
+                    >
+                      <input
+                        *ngIf="subcategory"
+                        type="checkbox"
+                        id="{{ subcategory._id }}"
+                        value="{{ subcategory._id }}"
+                        (change)="handleSubs($event, subcategory._id)"
+                      /><label for="{{ subcategory._id }}">{{
+                        subcategory.subcategoryName
+                      }}</label>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Button Box -->
+              <div class="button-box text-center">
+                <button type="submit" class="theme-btn btn-style-one">
+                  <span class="txt">Guardar curso</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="manage-cource-section col-12">
+            <div class="auto-container">
+              <!-- Sec Title -->
+              <div class="sec-title">
+                <div class="clearfix">
+                  <div class="pull-left">
+                    <h4>Administar cursos</h4>
+                  </div>
+                </div>
+              </div>
+              <div class="inner-container pb-3">
+                <div class="container-content">
+                  <table class="table">
+                    <thead>
+                      <tr class="text-center">
+                        <th scope="col">Título</th>
+                        <th scope="col">Capítulos</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Fecha de creación</th>
+                        <th scope="col">Publicado</th>
+                        <th scope="col">Acción</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        class="text-center"
+                        *ngFor="
+                          let c_course of _courseService.createdCourses
+                            | paginate: { itemsPerPage: 5, currentPage: p }
+                        "
+                      >
+                        <th class="title" scope="col">
+                          {{ c_course.title }}
+                        </th>
+                        <th class="post-date" scope="col">
+                          {{ c_course.chapter.length }}
+                        </th>
+                        <th class="sales" scope="col">
+                          {{ c_course.coursePrice }}
+                        </th>
+                        <th class="category" scope="col">
+                          {{ c_course.createdAt | date }}
+                        </th>
+                        <th class="category" scope="col">
+                          <div
+                            class="switch_box box_1"
+                            style="margin-left: auto; margin-right: auto"
+                          >
+                            <input
+                              type="checkbox"
+                              id="{{ c_course._id }}"
+                              class="switch_1"
+                              [checked]="c_course.activeCourse"
+                              (change)="unPublishCourse($event, c_course._id)"
+                            />
+                          </div>
+                        </th>
+                        <th class="actions" scope="col">
+                          <div ngbDropdown container="body">
+                            <button
+                              type="button"
+                              class="btn btn-outline-success btn-sm"
+                              ngbDropdownToggle
+                            >
+                              Acciones
+                            </button>
+                            <div ngbDropdownMenu>
+                              <button
+                                ngbDropdownItem
+                                class="btn btn-light"
+                                (click)="
+                                  editCourse(c_course._id, editCourseModal)
+                                "
+                              >
+                                Editar
+                              </button>
+                              <button
+                                ngbDropdownItem
+                                class="btn btn-light"
+                                [routerLink]="['/curso/editar', c_course._id]"
+                              >
+                                Administrar curso
+                              </button>
+                              <div class="dropdown-divider"></div>
+                              <button
+                                ngbDropdownItem
+                                class="text-danger pointer btn btn-light"
+                                (click)="deleteCourse(content, c_course._id)"
+                              >
+                                Eliminar
+                              </button>
+                            </div>
+                          </div>
+                        </th>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div
+                class="container mt-2"
+                style="background-color: transparent !important"
+              >
+                <div class="row">
+                  <pagination-controls
+                    class="styled-pagination ml-auto mr-auto"
+                    (pageChange)="p = $event"
+                    previousLabel="<"
+                    nextLabel=">"
+                    directionLinks="false"
+                    autoHide="true"
+                  ></pagination-controls>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,396 @@
+<div class="sidebar-page-container">
+  <div class="auto-container">
+    <div class="row clearfix">
+      <!-- Content Side -->
+      <div class="content-side col-lg-9 col-md-12 col-sm-12">
+        <div class="checkout-section">
+          <h6>Detalles del pago</h6>
+
+          <!-- Checkout Form -->
+          <div class="checkout-form">
+            <form #gOrder="ngForm" (ngSubmit)="createOrder()">
+              <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                  <h2>Método de pago</h2>
+                </div>
+
+                <!-- Signup Info Tabs-->
+                <div class="checkout-info-tabs col-lg-12 col-md-12 col-sm-12">
+                  <!-- Checkout Tabs-->
+                  <div class="checkout-tabs tabs-box">
+                    <!-- Tab Btns -->
+                    <ul class="tab-btns tab-buttons clearfix">
+                      <li
+                        id="btncard"
+                        data-tab="#prod-creditcard"
+                        class="tab-btn"
+                        (click)="switchTab('btn2')"
+                      >
+                        <span class="icon flaticon-credit-card"></span>
+                        Tarjeta de debito o Credito
+                      </li>
+                      <li
+                        id="btnsinpe"
+                        data-tab="#prod-sinpe"
+                        class="tab-btn"
+                        (click)="switchTab('btn1')"
+                      >
+                        <span class="icon flaticon-credit-card"></span>
+                        Transferencia Bancaria o Sinpe
+                      </li>
+                    </ul>
+
+                    <!-- Tabs Container -->
+                    <div class="tabs-content">
+                      <!-- Tab / Active Tab -->
+
+                      <div class="tab" id="prod-creditcard">
+                        <div class="row clearfix">
+                          <!-- Form Group -->
+
+                          <div class="col-sm-12 mb-5">
+                            <div class="form-check form-check-inline">
+                              <input
+                                class="form-check-input"
+                                type="radio"
+                                name="inlineRadioOptions"
+                                id="inlineRadio1"
+                                value="option1"
+                              />
+                              <label class="form-check-label" for="inlineRadio1"
+                                >Mastercard</label
+                              >
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <input
+                                class="form-check-input"
+                                type="radio"
+                                name="inlineRadioOptions"
+                                id="inlineRadio2"
+                                value="option2"
+                              />
+                              <label class="form-check-label" for="inlineRadio2"
+                                >Visa</label
+                              >
+                            </div>
+                          </div>
+
+                          <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                            <label>Nombre *</label>
+                            <input
+                              type="text"
+                              name="name"
+                              [(ngModel)]="orderDetails.name"
+                              placeholder="Nombre"
+                              required
+                            />
+                          </div>
+
+                          <!-- Form Group -->
+                          <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                            <label>Apellidos *</label>
+                            <input
+                              type="text"
+                              name="surname"
+                              [(ngModel)]="orderDetails.surname"
+                              placeholder="Apellidos"
+                              required
+                            />
+                          </div>
+                          <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                            <label>Correo electrónico *</label>
+                            <input
+                              type="text"
+                              name="email"
+                              [(ngModel)]="orderDetails.email"
+                              placeholder="Dirección de correo electrónico"
+                              required
+                            />
+                          </div>
+                          <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                            <label>Número de teléfono</label>
+                            <input
+                              type="text"
+                              name="phone"
+                              [(ngModel)]="orderDetails.phone"
+                              placeholder="Número de teléfono"
+                            />
+                          </div>
+
+                          <div class="form-group col-lg-9 col-md-9 col-sm-12">
+                            <label>Numero de tarjeta *</label>
+                            <input type="text" name="tarjeta" required />
+                          </div>
+                          <div class="form-group col-lg-3 col-md-3 col-sm-12">
+                            <label>CVV</label>
+                            <input type="text" name="cvv" />
+                          </div>
+                          <div class="form-row">
+                            <div class="form-group col-md-6">
+                              <label for="inputCity">City</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                id="inputCity"
+                              />
+                            </div>
+                            <div class="form-group col-md-4">
+                              <label for="inputState">State</label>
+
+                              <input
+                                type="text"
+                                class="form-control"
+                                id="inputState"
+                              />
+                            </div>
+                            <div class="form-group col-md-2">
+                              <label for="inputZip">Zip</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                id="inputZip"
+                              />
+                            </div>
+                          </div>
+                          <div class="form-group col-md-12 col-sm-12">
+                            <label>Primera direccion de facturacion</label>
+                            <input type="text" name="direction1" />
+                          </div>
+                          <div class="form-group col-md-12 col-sm-12">
+                            <label>Segunda direccion de facturacion</label>
+                            <input type="text" name="direction2" />
+                          </div>
+
+                          <div
+                            class="
+                              col-lg-12 col-md-12 col-sm-12
+                              form-group
+                              mt-4
+                            "
+                          >
+                            <h2>Detalles de la orden</h2>
+                          </div>
+
+                          <div
+                            class="
+                              col-lg-12 col-md-12 col-sm-12
+                              form-group
+                              mt-3
+                            "
+                          >
+                            <!-- Order Box -->
+                            <div class="order-box">
+                              <ul>
+                                <li class="clearfix" NgIf="course">
+                                  {{ course.title }}
+                                  <span class="pull-right">
+                                    {{
+                                      course.coursePrice | currency: "₡"
+                                    }}</span
+                                  >
+                                </li>
+                                <li class="clearfix">
+                                  IVA
+                                  <span class="pull-right">{{
+                                    course.coursePrice * 0.13 | currency: "₡"
+                                  }}</span>
+                                </li>
+                                <li class="clearfix">
+                                  <strong>Total</strong>
+                                  <span class="pull-right">{{
+                                    course.coursePrice +
+                                      course.coursePrice * 0.13 | currency: "₡"
+                                  }}</span>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+
+                          <div
+                            class="
+                              col-lg-12 col-md-12 col-sm-12
+                              form-group
+                              text-right
+                            "
+                          >
+                            <button
+                              class="theme-btn btn-style-one pointer"
+                              (click)="noavailable()"
+                            >
+                              <span class="txt">Confirmar compra</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="tab" id="prod-sinpe">
+                        <div class="row clearfix">
+                          <!-- Form Group -->
+                          <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                            <label>Nombre *</label>
+                            <input
+                              type="text"
+                              name="name"
+                              [(ngModel)]="orderDetails.name"
+                              placeholder="Nombre"
+                              required
+                            />
+                          </div>
+
+                          <!-- Form Group -->
+                          <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                            <label>Apellidos *</label>
+                            <input
+                              type="text"
+                              name="surname"
+                              [(ngModel)]="orderDetails.surname"
+                              placeholder="Apellidos"
+                              required
+                            />
+                          </div>
+                          <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                            <label>Correo electrónico *</label>
+                            <input
+                              type="text"
+                              name="email"
+                              [(ngModel)]="orderDetails.email"
+                              placeholder="Dirección de correo electrónico"
+                              required
+                            />
+                          </div>
+                          <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                            <label>Número de teléfono</label>
+                            <input
+                              type="text"
+                              name="phone"
+                              [(ngModel)]="orderDetails.phone"
+                              placeholder="Número de teléfono"
+                            />
+                          </div>
+                          <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                            <h2>Información para efectuar el pago</h2>
+                          </div>
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">Método de pago</th>
+                                <th scope="col">Información</th>
+                                <th scope="col">Entidad</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Transeferencia bancaria</td>
+                                <td>CR5485223525658658</td>
+                                <td>Banco Nacional</td>
+                              </tr>
+                              <tr>
+                                <td>SINPE Movil</td>
+                                <td>+ (506) 8888-8888</td>
+                                <td>John Doe example</td>
+                              </tr>
+                            </tbody>
+                          </table>
+
+                          <span class="text-danger">
+                            * Por favor enviar comprobante de pago al WhatsApp:
+                            8888-8888</span
+                          >
+                          <div
+                            class="
+                              col-lg-12 col-md-12 col-sm-12
+                              form-group
+                              mt-4
+                            "
+                          >
+                            <h2>Detalles de la orden</h2>
+                          </div>
+
+                          <div
+                            class="
+                              col-lg-12 col-md-12 col-sm-12
+                              form-group
+                              mt-3
+                            "
+                          >
+                            <!-- Order Box -->
+                            <div class="order-box">
+                              <ul>
+                                <li class="clearfix" NgIf="course">
+                                  {{ course.title }}
+                                  <span class="pull-right">
+                                    {{
+                                      course.coursePrice | currency: "₡"
+                                    }}</span
+                                  >
+                                </li>
+                                <li class="clearfix">
+                                  IVA
+                                  <span class="pull-right">{{
+                                    course.coursePrice * 0.13 | currency: "₡"
+                                  }}</span>
+                                </li>
+                                <li class="clearfix">
+                                  <strong>Total</strong>
+                                  <span class="pull-right">{{
+                                    course.coursePrice +
+                                      course.coursePrice * 0.13 | currency: "₡"
+                                  }}</span>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+
+                          <div
+                            class="
+                              col-lg-12 col-md-12 col-sm-12
+                              form-group
+                              text-right
+                            "
+                          >
+                            <button
+                              class="theme-btn btn-style-one pointer"
+                              (click)="noavailable()"
+                            >
+                              <span class="txt">Confirmar compra</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar Side -->
+      <div class="sidebar-side col-lg-3 col-md-12 col-sm-12">
+        <aside class="sidebar sticky-top">
+          <!-- Order Widget -->
+          <div class="sidebar-widget order-widget">
+            <div class="widget-content">
+              <div class="sidebar-title">
+                <h5>Detalles del producto</h5>
+              </div>
+              <!-- Order Box -->
+              <div class="order-box p-3">
+                <img src="{{ imageUrl }}" class="mb-3" width="100%" alt="" />
+                <span class="h5 font-weight-bold mb-4" NgIf="course">
+                  {{ course.title }}</span
+                >
+                <hr />
+                <span class="h5 mt-4" [innerHTML]="cuttedDesc"></span>
+                <hr />
+                <span class="font-weight-bold">{{
+                  course.coursePrice | currency: "₡"
+                }}</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</div>
