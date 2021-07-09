@@ -60,6 +60,7 @@ export class PlayVideoComponent implements OnInit {
   LoadVideo(videoName, comments, videoId, sm) {
     this.videoFileName = videoName;
     this.comments = comments;
+    //console.log(this.comments);
     this.videoId = videoId;
     this.sM = sm;
   }

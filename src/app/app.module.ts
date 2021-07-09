@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { routing, appRoutingProviders } from './app.routing';
 
 //* importe de librerias aqui
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 // Import all Froala Editor plugins.
 import 'froala-editor/js/plugins.pkgd.min.js';
@@ -119,6 +120,7 @@ import { BuyCourseComponent } from './components/course/buy-course/buy-course.co
     NgxPaginationModule,
     DragDropModule,
     PlyrModule,
+    CKEditorModule,
   ],
   providers: [
     appRoutingProviders,

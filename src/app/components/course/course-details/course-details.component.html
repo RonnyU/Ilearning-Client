@@ -20,7 +20,7 @@
       <div class="row clearfix">
         <!-- Left Column -->
         <div class="left-column col-lg-4 col-md-12 col-sm-12">
-          <div class="inner-column" *ngIf="data.videoPath == null">
+          <div class="inner-column" *ngIf="vpath == null">
             <!-- Video Box -->
             <div
               class="intro-video"
@@ -28,19 +28,19 @@
               style="background-position: center"
             >
               <h4 class="text-light w-50 mx-auto">
-                Comienza a aprender con: {{ data.title }}
+                Comienza a aprender con: {{ vtitle }}
               </h4>
             </div>
           </div>
-          <div class="inner-column" *ngIf="data.videoPath != null">
+          <div class="inner-column" *ngIf="vpath != null">
             <!-- Video Box -->
             <div>
               <video
                 controls
                 style="max-width: 100%; min-height: 500px"
-                poster="{{ url + 'video/getVideo/' + data.videoPath }}"
+                poster="{{ url + 'video/getVideo/' + vpath }}"
               >
-                <source src="{{ url }}/video/getVideo/{{ data.videoPath }}" />
+                <source src="{{ url }}/video/getVideo/{{ vpath }}" />
               </video>
             </div>
           </div>
@@ -49,16 +49,16 @@
         <!-- Right Column -->
         <div class="right-column col-lg-8 col-md-12 col-sm-12">
           <div class="inner-column">
-            <h2>{{ data.title }}</h2>
+            <h2>{{ vtitle }}</h2>
 
             <div class="price">
-              Este curso tiene un precio de: <span>{{ data.coursePrice }}</span>
+              Este curso tiene un precio de: <span>{{ vprice }}</span>
             </div>
             <div class="text text-v-truncated">
               <span
                 class=""
                 style="max-height: 100px"
-                [innerHTML]="data.courseDesc"
+                [innerHTML]="vdesc"
               ></span>
             </div>
             <div class="buttons-box">
@@ -84,7 +84,7 @@
                   alt=""
                 />
               </div>
-              {{ data.user.name }} {{ data.user.surname }}
+              {{ user.name }} {{ user.surname }}
             </div>
             <!-- Follow 
             <div class="follow"><span>+ Suscríbete</span></div> -->
@@ -127,7 +127,7 @@
                   <!-- Block -->
                   <li
                     *ngFor="
-                      let chap of data.chapter | sort: 'position';
+                      let chap of chapter | sort: 'position';
                       let i = index
                     "
                     class="accordion block"
@@ -161,8 +161,7 @@
                       </div>
                       <div
                         *ngFor="
-                          let lesson of data.chapter[i].lesson
-                            | sort: 'position';
+                          let lesson of chapter[i].lesson | sort: 'position';
                           let indice = index
                         "
                         class="content"
@@ -200,7 +199,7 @@
             </div>
             <div class="tab" id="course-info">
               <div class="content">
-                <span [innerHTML]="data.courseDesc"></span>
+                <span [innerHTML]="vdesc"></span>
               </div>
             </div>
           </div>

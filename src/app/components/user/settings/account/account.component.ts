@@ -6,8 +6,7 @@ import { environment } from '../../../../../environments/environment';
 import { NOTYF } from '../../../../../assets/ts/notyf.token';
 import { Notyf } from 'notyf';
 import { stringUtil } from '../../../../helpers/back-utilities/string-utilities';
-
-//import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
+import * as customBuild from '../../../../../assets/EditorCustom/ckeditor';
 
 @Component({
   selector: 'app-account',
@@ -19,6 +18,8 @@ export class AccountComponent implements OnInit {
   public pageTitle: string;
   public user: User;
   //public tabs;
+  public Editor = customBuild;
+
   public status;
   public identity;
   public token;
@@ -38,31 +39,6 @@ export class AccountComponent implements OnInit {
     toolbarButtonsMD: ['bold', 'italic', 'underline', 'paragraphFormat'],
   };
 
-  /*
-  editorModules = {
-    toolbar: [
-      ['bold', 'italic', 'underline', 'strike'], // toggled buttons
-      ['blockquote', 'code-block'],
-
-      [{ header: 1 }, { header: 2 }], // custom button values
-      [{ list: 'ordered' }, { list: 'bullet' }],
-      [{ script: 'sub' }, { script: 'super' }], // superscript/subscript
-      [{ indent: '-1' }, { indent: '+1' }], // outdent/indent
-      [{ direction: 'rtl' }], // text direction
-
-      [{ size: ['small', false, 'large', 'huge'] }], // custom dropdown
-      [{ header: [1, 2, 3, 4, 5, 6, false] }],
-
-      [{ color: [] }, { background: [] }], // dropdown with defaults from theme
-      [{ font: [] }],
-      [{ align: [] }],
-
-      ['clean'], // remove formatting button
-
-      ['link', 'image', 'video'], // link and image, video
-    ],
-  };
-*/
   constructor(
     private _userService: UserService,
     @Inject(NOTYF) private notyf: Notyf
@@ -101,17 +77,15 @@ export class AccountComponent implements OnInit {
     };
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.user);
+    console.log(this.user.name);
+  }
 
   avatarUpload(data) {
     this.user.imagePath = data.body.user.imagePath;
   }
 
-  /*
-  changeEditor(event: EditorChangeContent | EditorChangeSelection) {
-    console.log('editor got changed', event);
-  }
-*/
   onSubmit(form) {
     if (this.validationAlerts()) {
       this._userService.update(this.user).subscribe(

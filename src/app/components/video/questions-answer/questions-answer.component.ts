@@ -7,6 +7,7 @@ import { CommentService } from './../../../services/comment.service';
 import { stringUtil } from './../../../helpers/back-utilities/string-utilities';
 import { NOTYF } from '../../../../assets/ts/notyf.token';
 import { Notyf } from 'notyf';
+import * as customBuild from '../../../../assets/EditorCustom/ckeditor';
 
 @Component({
   selector: 'app-questions-answer',
@@ -16,10 +17,12 @@ import { Notyf } from 'notyf';
 })
 export class QuestionsAnswerComponent implements OnInit {
   public videoTS;
+  public Editor = customBuild;
   public commentsTS;
   public comment: Comment;
   public identity;
   public token;
+  public countCommentsArray = [];
   public status;
   public options: Object = {
     charCounterCount: true,
@@ -81,25 +84,39 @@ export class QuestionsAnswerComponent implements OnInit {
   }
 
   onSubmit(form) {
-    if (
-      !stringUtil.isEmpty(this.comment.title) &&
-      !stringUtil.isEmpty(this.comment.content)
-    ) {
-      this._commentService
-        .create(this.comment, this.token, this.videoTS)
-        .subscribe(
-          (res) => {
-            if (res.status == 'success') {
-              this.commentsTS = res.newVideo.comments;
-            }
-          },
-          (err) => {
-            console.log(err);
-          }
-        );
-    } else {
-      this.alertMssg();
-    }
-    form.reset();
+    this.countComments();
+    // if (
+    //   !stringUtil.isEmpty(this.comment.title) &&
+    //   !stringUtil.isEmpty(this.comment.content)
+    // ) {
+    //   console.log(this.comment);
+    //   this._commentService
+    //     .create(this.comment, this.token, this.videoTS)
+    //     .subscribe(
+    //       (res) => {
+    //         if (res.status == 'success') {
+    //           this.commentsTS = res.newVideo.comments;
+    //         }
+    //       },
+    //       (err) => {
+    //         console.log(err);
+    //       }
+    //     );
+    // } else {
+    //   this.alertMssg();
+    // }
+    // form.reset();
+  }
+
+  countComments() {
+    console.log(this.commentsTS);
+    console.log('******************');
+    //console.log(this.commentsTS[0].comments.length);
+
+    this.commentsTS.forEach((element) => {
+      console.log(element.comments.length);
+      this.countCommentsArray.push(element.comments.length);
+    });
+    console.log(this.countCommentsArray);
   }
 }

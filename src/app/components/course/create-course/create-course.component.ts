@@ -8,6 +8,7 @@ import { CourseService } from '../../../services/course.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from '../../../services/user.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import * as customBuild from '../../../../assets/EditorCustom/ckeditor';
 declare var jQuery: any;
 declare var $: any;
 
@@ -26,6 +27,7 @@ export class CreateCourseComponent implements OnInit {
     theme: 'dark',
   };
   public util;
+  public Editor = customBuild;
   public files: File[] = [];
   public videoIntro: File[] = [];
   public token;

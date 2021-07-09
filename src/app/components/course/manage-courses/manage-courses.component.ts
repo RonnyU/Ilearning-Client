@@ -6,6 +6,7 @@ import { UserService } from '../../../services/user.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NOTYF } from '../../../../assets/ts/notyf.token';
 import { Notyf } from 'notyf';
+import * as customBuild from '../../../../assets/EditorCustom/ckeditor';
 
 @Component({
   selector: 'app-manage-courses',
@@ -16,6 +17,7 @@ import { Notyf } from 'notyf';
 export class ManageCoursesComponent implements OnInit {
   public courses: Array<Course>;
   public token;
+  public Editor = customBuild;
   public identity;
   public url;
   public totalPages;

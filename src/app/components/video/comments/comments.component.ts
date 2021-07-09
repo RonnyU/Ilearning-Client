@@ -6,7 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NOTYF } from '../../../../assets/ts/notyf.token';
 import { Notyf } from 'notyf';
 import { stringUtil } from '../../../helpers/back-utilities/string-utilities';
-import { textChangeRangeIsUnchanged } from 'typescript';
+import * as customBuild from '../../../../assets/EditorCustom/ckeditor';
 
 @Component({
   selector: 'app-comments',
@@ -16,6 +16,7 @@ import { textChangeRangeIsUnchanged } from 'typescript';
 })
 export class CommentsComponent implements OnInit {
   public commentId;
+  public Editor = customBuild;
   public videoId;
   public comment;
   public comments;
@@ -226,7 +227,7 @@ export class CommentsComponent implements OnInit {
         ) {
           validation = true;
         } else {
-          console.log('option 0');
+          //console.log('option 0');
           this.notyf.open({
             type: 'warning',
             message: 'No se puede actualiuzar si hay campos en blanco',
@@ -237,7 +238,7 @@ export class CommentsComponent implements OnInit {
         if (!stringUtil.isEmpty(this.commentFU.content)) {
           validation = true;
         } else {
-          console.log('option 1');
+          //console.log('option 1');
           this.notyf.open({
             type: 'warning',
             message: 'No se puede actualizar un comentario en blanco',

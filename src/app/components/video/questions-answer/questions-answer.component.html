@@ -41,14 +41,13 @@
                 </div>
 
                 <div class="col-lg-12 col-md-12 col-sm-12 mb-1">
-                  <textarea
-                    [froalaEditor]="options"
-                    name="content"
-                    class="form-control"
-                    #content="ngModel"
+                  <ckeditor
                     [(ngModel)]="comment.content"
-                    [(froalaModel)]="comment.content"
-                  ></textarea>
+                    [editor]="Editor"
+                    id="content"
+                    name="content"
+                  >
+                  </ckeditor>
                 </div>
 
                 <div class="col-lg-12 col-md-12 col-sm-12 form-group">
@@ -71,7 +70,7 @@
                 <span
                   class="badge badge-primary badge-pill"
                   style="float: right"
-                  >0</span
+                  >{{ com.comments.length }}</span
                 >
                 <h5
                   class="card-title pointer title"

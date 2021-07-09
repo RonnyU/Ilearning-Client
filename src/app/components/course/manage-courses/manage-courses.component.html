@@ -35,12 +35,15 @@
         </div>
         <div class="col-12">
           <label for="inputAddress" class="form-label">Descripción</label>
-          <textarea
-            [froalaEditor]="options"
-            name="courseDesc"
+
+          <ckeditor
             [(ngModel)]="toUpdate.courseDesc"
-            [(froalaModel)]="toUpdate.courseDesc"
-          ></textarea>
+            [editor]="Editor"
+            id="courseDesc"
+            name="courseDesc"
+            data="{{ toUpdate.courseDesc }}"
+          >
+          </ckeditor>
         </div>
       </div>
     </div>

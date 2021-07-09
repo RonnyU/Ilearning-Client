@@ -1,5 +1,5 @@
 export const global = {
-  url: 'https://ilearning-api-badz6.ondigitalocean.app/api/',
+  url: 'http://localhost:3999/api/',
   htmlEntities: function (str) {
     return String(str)
       .replace('&ntilde;', 'ñ')

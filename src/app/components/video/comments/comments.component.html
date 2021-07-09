@@ -40,14 +40,22 @@
         *ngIf="commentFU.id != commentId"
       ></div>
       <div class="col-lg-12 col-md-12 col-sm-12 mb-1">
-        <textarea
+        <!-- <textarea
           [froalaEditor]="options"
           name="content"
           class="form-control"
           #content="ngModel"
           [(ngModel)]="commentFU.content"
           [(froalaModel)]="commentFU.content"
-        ></textarea>
+        ></textarea> -->
+        <ckeditor
+          [(ngModel)]="commentFU.content"
+          [editor]="Editor"
+          id="content"
+          name="content"
+          data="{{ commentFU.content }}"
+        >
+        </ckeditor>
       </div>
 
       <div class="col-lg-12 col-md-12 col-sm-12 form-group">
@@ -146,12 +154,7 @@
     >
       <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12 mb-1">
-          <textarea
-            [froalaEditor]="options"
-            ngModel
-            name="content"
-            class="form-control"
-          ></textarea>
+          <ckeditor ngModel [editor]="Editor" name="content"> </ckeditor>
         </div>
 
         <div class="col-lg-12 col-md-12 col-sm-12 form-group">

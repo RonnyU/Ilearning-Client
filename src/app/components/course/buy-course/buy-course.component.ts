@@ -146,7 +146,10 @@ export class BuyCourseComponent implements OnInit {
       }
 
       default: {
-        //statements;
+        btnSinpe.className = 'tab-btn';
+        tabSinpe.className = 'tab';
+        btnCard.className = 'tab-btn';
+        tabCard.className = 'tab';
         break;
       }
     }

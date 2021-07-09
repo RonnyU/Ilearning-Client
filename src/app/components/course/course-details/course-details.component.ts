@@ -13,8 +13,18 @@ export class CourseDetailsComponent implements OnInit {
   private id;
   private util;
   public data;
+  public user = {
+    name: '',
+    surname: '',
+  };
+  public chapter;
   public url;
   public imageUrl;
+  public vpath;
+  public vtitle;
+  public vprice;
+  public vdesc;
+
   constructor(
     public _courseService: CourseService,
     private route: ActivatedRoute,
@@ -38,6 +48,14 @@ export class CourseDetailsComponent implements OnInit {
       if (res.status) {
         this.data = res.course;
         this.imageUrl = this.url + 'course/image/' + this.data.imagePath;
+        this.vpath = this.data.videoPath;
+        this.vtitle = this.data.title;
+        this.vprice = this.data.coursePrice;
+        this.vdesc = this.data.courseDesc;
+        this.user.name = this.data.user.name;
+        this.user.surname = this.data.user.surname;
+        this.chapter = this.data.chapter;
+        console.log(this.imageUrl);
       } else {
       }
     });
