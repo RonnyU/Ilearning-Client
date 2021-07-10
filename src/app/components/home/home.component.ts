@@ -104,10 +104,10 @@ export class HomeComponent implements OnInit {
   }
   validarComprado(id) {
     let comprado = false;
-    console.log(this.identity);
+    //console.log(this.identity);
     if (this.identity != null) {
       for (let i = 0; i < this.identity.mycourses.length; i++) {
-        console.log(this.identity.mycourses[i]);
+        //console.log(this.identity.mycourses[i]);
         const element = this.identity.mycourses[i];
         if (element == id) {
           comprado = true;

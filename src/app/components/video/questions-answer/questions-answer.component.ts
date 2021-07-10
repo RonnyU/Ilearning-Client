@@ -84,39 +84,26 @@ export class QuestionsAnswerComponent implements OnInit {
   }
 
   onSubmit(form) {
-    this.countComments();
-    // if (
-    //   !stringUtil.isEmpty(this.comment.title) &&
-    //   !stringUtil.isEmpty(this.comment.content)
-    // ) {
-    //   console.log(this.comment);
-    //   this._commentService
-    //     .create(this.comment, this.token, this.videoTS)
-    //     .subscribe(
-    //       (res) => {
-    //         if (res.status == 'success') {
-    //           this.commentsTS = res.newVideo.comments;
-    //         }
-    //       },
-    //       (err) => {
-    //         console.log(err);
-    //       }
-    //     );
-    // } else {
-    //   this.alertMssg();
-    // }
-    // form.reset();
-  }
-
-  countComments() {
-    console.log(this.commentsTS);
-    console.log('******************');
-    //console.log(this.commentsTS[0].comments.length);
-
-    this.commentsTS.forEach((element) => {
-      console.log(element.comments.length);
-      this.countCommentsArray.push(element.comments.length);
-    });
-    console.log(this.countCommentsArray);
+    if (
+      !stringUtil.isEmpty(this.comment.title) &&
+      !stringUtil.isEmpty(this.comment.content)
+    ) {
+      //console.log(this.comment);
+      this._commentService
+        .create(this.comment, this.token, this.videoTS)
+        .subscribe(
+          (res) => {
+            if (res.status == 'success') {
+              this.commentsTS = res.newVideo.comments;
+            }
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+    } else {
+      this.alertMssg();
+    }
+    form.reset();
   }
 }

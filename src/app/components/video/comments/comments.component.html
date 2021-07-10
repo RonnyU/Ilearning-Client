@@ -40,14 +40,6 @@
         *ngIf="commentFU.id != commentId"
       ></div>
       <div class="col-lg-12 col-md-12 col-sm-12 mb-1">
-        <!-- <textarea
-          [froalaEditor]="options"
-          name="content"
-          class="form-control"
-          #content="ngModel"
-          [(ngModel)]="commentFU.content"
-          [(froalaModel)]="commentFU.content"
-        ></textarea> -->
         <ckeditor
           [(ngModel)]="commentFU.content"
           [editor]="Editor"

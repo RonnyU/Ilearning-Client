@@ -32,8 +32,6 @@ export class CourseService {
     });
   }
   uploadCourseImage(course, image, token): Observable<any> {
-    console.log(image);
-
     const apiHeaders = new HttpHeaders().set('Authorization', token);
     // hacer peticion ajax
     return this._http.post(this.url + 'course/upload-image/' + course, image, {
@@ -41,7 +39,7 @@ export class CourseService {
     });
   }
   uploadCoursevideoIntro(course, video, token): Observable<any> {
-    console.log(video);
+    //console.log(video);
 
     const apiHeaders = new HttpHeaders().set('Authorization', token);
     // hacer peticion ajax

@@ -55,7 +55,7 @@ export class CourseDetailsComponent implements OnInit {
         this.user.name = this.data.user.name;
         this.user.surname = this.data.user.surname;
         this.chapter = this.data.chapter;
-        console.log(this.imageUrl);
+        //console.log(this.imageUrl);
       } else {
       }
     });

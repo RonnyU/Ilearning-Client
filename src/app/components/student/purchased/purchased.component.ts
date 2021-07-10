@@ -34,7 +34,7 @@ export class PurchasedComponent implements OnInit {
       (res) => {
         if ((res.status = 'success')) {
           this.courses = res.mycourses;
-          console.log(res);
+          //console.log(res);
         }
       },
       (err) => {

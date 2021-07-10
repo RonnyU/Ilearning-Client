@@ -39,7 +39,7 @@ export class PrivacyComponent implements OnInit {
       if (this.pass.newpassword == this.pass.confirmpassword) {
         this._userService.updatePassword(this.pass).subscribe(
           (response) => {
-            console.log(response);
+            //console.log(response);
             if (response.status) {
               this.status = 'success';
               this.validationAlerts(0);

@@ -55,7 +55,7 @@ export class RegisterComponent implements OnInit {
     if (this.user.password == form.value.confirmPassword) {
       this._userService.register(this.user).subscribe(
         (response) => {
-          console.log(response);
+          //console.log(response);
           if (response.user && response.user._id) {
             this.removeClasses();
             this.addSuccess();

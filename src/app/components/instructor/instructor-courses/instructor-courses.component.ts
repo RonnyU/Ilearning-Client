@@ -46,7 +46,7 @@ export class InstructorCoursesComponent implements OnInit {
       (res) => {
         if (res.status) {
           this.courses = res.courses;
-          console.log(this.courses);
+          //console.log(this.courses);
         }
       },
       (err) => {

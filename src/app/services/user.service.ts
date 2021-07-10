@@ -80,7 +80,7 @@ export class UserService {
     const apiHeaders = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Authorization', this.getToken());
-    console.log(apiHeaders);
+    //console.log(apiHeaders);
     return this._http.put(this.url + 'user', params, {
       headers: apiHeaders,
     });
@@ -115,7 +115,7 @@ export class UserService {
       .set('Content-Type', 'application/json')
       .set('Authorization', this.getToken());
 
-    console.log(apiHeaders);
+    //console.log(apiHeaders);
     return this._http.put(this.url + 'user/disableAccount', pass, {
       headers: apiHeaders,
     });

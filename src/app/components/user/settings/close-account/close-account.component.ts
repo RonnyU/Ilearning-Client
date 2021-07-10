@@ -49,13 +49,13 @@ export class CloseAccountComponent implements OnInit {
 
   onSubmit(form) {
     if (form.value.confirmationCheck) {
-      console.log('paso confirmationcheck');
+      //console.log('paso confirmationcheck');
 
       if (this.pass.currentpassword == this.pass.confirmpassword) {
-        console.log('paso clave actual y confirmacion');
+        //console.log('paso clave actual y confirmacion');
         this._userService.disableAccount(this.pass).subscribe(
           (response) => {
-            console.log(response);
+            //console.log(response);
             if (response.status) {
               this.validationAlerts(0);
               this.logOut();

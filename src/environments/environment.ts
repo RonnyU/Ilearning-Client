@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'https://ilearning-api-oq5ef.ondigitalocean.app/api/',
+  url: 'https://ilearning-api-scc38.ondigitalocean.app/api/',
   //url: 'http://localhost:3999/api/',
 };
 

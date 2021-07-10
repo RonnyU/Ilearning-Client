@@ -78,8 +78,8 @@ export class AccountComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.user);
-    console.log(this.user.name);
+    //console.log(this.user);
+    //console.log(this.user.name);
   }
 
   avatarUpload(data) {
@@ -90,7 +90,7 @@ export class AccountComponent implements OnInit {
     if (this.validationAlerts()) {
       this._userService.update(this.user).subscribe(
         (response) => {
-          console.log(response);
+          //console.log(response);
           if (!response.user) {
             this.status = 'error';
           } else {

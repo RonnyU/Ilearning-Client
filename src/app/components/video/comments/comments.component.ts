@@ -301,7 +301,7 @@ export class CommentsComponent implements OnInit {
       .createMoreComments(content, this.token, this.videoId, this.commentId)
       .subscribe(
         (res) => {
-          console.log(res);
+          //console.log(res);
           if (res.status == 'success') {
             this.getCommentsInside();
           }

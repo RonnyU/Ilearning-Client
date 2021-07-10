@@ -29,7 +29,7 @@ export class SearchComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       this.searchValue = params.get('search');
       this.getFoundCourses(this.searchValue);
-      console.log(this.searchValue);
+      //console.log(this.searchValue);
     });
     this.identity = _userService.getIdentity();
     this.url = environment.url;

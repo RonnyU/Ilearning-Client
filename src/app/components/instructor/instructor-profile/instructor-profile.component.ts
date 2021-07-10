@@ -49,7 +49,7 @@ export class InstructorProfileComponent implements OnInit {
       (res) => {
         if ((res.status = 'success')) {
           this.user = res.user;
-          console.log(this.url + 'user/avatar/' + this.user.imagePath);
+          //console.log(this.url + 'user/avatar/' + this.user.imagePath);
         }
       },
       (err) => {
