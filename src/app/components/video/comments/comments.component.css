@@ -11,8 +11,14 @@
   border: 1px solid gainsboro;
   transition: 0.3s;
   margin: 0.5rem;
+  background-color: #ccd8f7;
 }
 
 .card-body {
   padding: 20px 20px 10px 20px;
+  background-color: white;
+}
+
+.space {
+  margin-bottom: 20px;
 }

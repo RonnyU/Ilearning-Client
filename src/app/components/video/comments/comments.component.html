@@ -164,35 +164,35 @@
   <hr />
   <br />
   <h6>Respuestas</h6>
-  <div class="p-2">
-    <ul class="list-group list-group-flush mt-2" *ngFor="let com of comments">
-      <li class="list-group-item" style="border-radius: 30px 30px 30px 30px">
-        <div *ngIf="identity && identity._id == com.user._id">
-          <span class="ml-2 pointer">
-            <a
-              class="fa fa-pencil-square-o ml-2 pointer"
-              style="float: right"
-              (click)="openMainModal(editComment, 1, com._id)"
-            ></a>
-          </span>
 
-          <i
-            class="fa fa-trash pointer"
+  <div class="card">
+    <div class="card-body space" *ngFor="let com of comments">
+      <div *ngIf="identity && identity._id == com.user._id">
+        <span class="ml-2 pointer">
+          <a
+            class="fa fa-pencil-square-o ml-2 pointer"
             style="float: right"
-            (click)="openModalFDelete(deleteComment, 1, com._id)"
-          ></i>
-        </div>
-        <p class="p-2 text" style="color: gray" [innerHTML]="com.content"></p>
-        <footer class="blockquote-footer mt-3">
-          <span class="quote pointer">{{
-            com.user.name + com.user.surname
-          }}</span>
-          <cite title="Source Title"
-            ><i class="fa fa-caret-right" aria-hidden="true"></i>
-            {{ com.updatedAt | amLocale: "es" | amTimeAgo }}</cite
-          >
-        </footer>
-      </li>
-    </ul>
+            (click)="openMainModal(editComment, 1, com._id)"
+          ></a>
+        </span>
+
+        <i
+          class="fa fa-trash pointer"
+          style="float: right"
+          (click)="openModalFDelete(deleteComment, 1, com._id)"
+        ></i>
+      </div>
+
+      <p class="card-text" [innerHTML]="com.content" style="color: gray"></p>
+      <footer class="blockquote-footer mt-3">
+        <span class="quote pointer">{{
+          com.user.name + com.user.surname
+        }}</span>
+        <cite title="Source Title"
+          ><i class="fa fa-caret-right" aria-hidden="true"></i>
+          {{ com.updatedAt | amLocale: "es" | amTimeAgo }}</cite
+        >
+      </footer>
+    </div>
   </div>
 </div>
