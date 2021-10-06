@@ -9,27 +9,29 @@
     <!-- Para el usuario -->
     <li>
       <a [routerLink]="['']"
-        ><i class="icon flaticon-home"></i>
-        <span><i class="flaticon-home"></i> Listado de categorías</span></a
+        ><i class="icon flaticon-list"></i>
+        <span><i class="flaticon-list"></i> Listado de categorías</span></a
       >
     </li>
     <li>
       <a [routerLink]="['/estudiante/perfil']"
-        ><i class="icon flaticon-home"></i>
-        <span><i class="flaticon-home"></i>Cursos Comprados</span></a
+        ><i class="icon flaticon-media-play-symbol"></i>
+        <span
+          ><i class="flaticon-media-play-symbol"></i>Cursos Comprados</span
+        ></a
       >
     </li>
     <li *ngIf="identity">
       <a [routerLink]="['/instructor/perfil', identity._id]"
-        ><i class="icon flaticon-home"></i>
-        <span><i class="flaticon-home"></i>Cursos Propios</span></a
+        ><i class="icon flaticon-file"></i>
+        <span><i class="flaticon-file"></i>Cursos Propios</span></a
       >
     </li>
     <!-- Para el instructor -->
     <li>
       <a [routerLink]="['configuracion/cuenta']"
-        ><i class="icon flaticon-home"></i>
-        <span><i class="flaticon-home"></i>Configuracion</span></a
+        ><i class="icon flaticon-settings"></i>
+        <span><i class="flaticon-settings"></i>Configuracion</span></a
       >
     </li>
   </ul>

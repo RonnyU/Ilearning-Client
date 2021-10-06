@@ -602,6 +602,20 @@ img {
   font-size: 28px;
   text-align: center;
   background-color: #ff5773;
+  display: none;
+}
+.main-header .left-sidebar-btn2 {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  color: #ffffff;
+  float: left;
+  cursor: pointer;
+  margin-right: 20px;
+  line-height: 80px;
+  font-size: 28px;
+  text-align: center;
+  background-color: #ff5773;
 }
 
 .main-header .header-left {

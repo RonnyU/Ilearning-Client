@@ -7,11 +7,12 @@
         <div class="header-left clearfix">
           <!-- Left Sidebar Btn -->
           <div
-            class="left-sidebar-btn hidden-bar-opener"
+            class="menu2 left-sidebar-btn hidden-bar-opener"
             style="background-color: white"
           >
-            <span class="icon flaticon-menu-2 text-black-50"></span>
+            <span class="menu2 icon flaticon-menu-2 text-black-50"></span>
           </div>
+          <div class="left-sidebar-btn2" style="background-color: white"></div>
 
           <div class="pull-left logo-box">
             <div class="logo row">
@@ -109,6 +110,14 @@
                       </li>
                     </ul>
                   </li>
+
+                  <li class="dropdown" *ngIf="!identity">
+                    <a [routerLink]="['/login']">Iniciar Sesión</a>
+                  </li>
+
+                  <li class="dropdown" *ngIf="!identity">
+                    <a [routerLink]="['/registro']">Registarse</a>
+                  </li>
                 </ul>
               </div>
             </nav>
@@ -200,6 +209,7 @@
     <span class="flaticon-multiply"></span>
   </div>
   <!-- Hidden Bar Wrapper -->
+
   <div class="hidden-bar-wrapper">
     <ul class="pages-list">
       <li class="active">
@@ -208,6 +218,7 @@
         >
       </li>
     </ul>
+
     <div
       class="heading profile-content"
       *ngIf="identity && identity.role == 'ROLE_INSTRUCTOR'"
@@ -237,6 +248,7 @@
         >
       </li>
     </ul>
+
     <div class="heading">Acciones</div>
     <ul class="pages-list">
       <li *ngIf="identity">
